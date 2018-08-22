@@ -1,9 +1,3 @@
-
-
-
-
-
-
 branch-protection:
   allow_disabled_policies: true  # TODO(fejta): remove, needed by k/website
   orgs:

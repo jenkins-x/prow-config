@@ -14,7 +14,12 @@ plugins.yaml: |
     review_acts_as_approve: true
   blunderbuss: {}
   cat: {}
-  config_updater: {}
+  config_updater:
+    maps:
+      prow/config.yaml:
+        name: config
+      prow/plugins.yaml:
+        name: plugins
   heart: {}
   owners: {}
   plugins:
@@ -51,6 +56,7 @@ plugins.yaml: |
     - size
     - trigger
     - wip
+    - config-updater
     jenkins-x/jx-release-version:
     - approve
     - assign
@@ -75,6 +81,8 @@ plugins.yaml: |
     - wip
     - cat
     - dog
+    - config-updater
+    - heart
   requiresig: {}
   sigmention: {}
   slack: {}
