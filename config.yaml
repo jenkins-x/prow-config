@@ -1,0 +1,79 @@
+
+
+
+
+
+
+branch-protection:
+  allow_disabled_policies: true  # TODO(fejta): remove, needed by k/website
+  orgs:
+    jenkins-x: 
+      protect: true
+      required_status_checks:
+        contexts:
+        - promotion-gate
+        repos:
+          prow-test2:
+            required_status_checks:
+              strict: true
+              contexts:
+              - promotion-gate
+
+owners_dir_blacklist:
+  default: null
+  repos: null
+
+pod_namespace: jx
+
+presubmits:
+  rawlingsj/prow-test2:
+  - agent: build
+  branches:
+    - master
+  cluster: ""
+  context: promotion-gate
+
+  labels: null
+  max_concurrency: 0
+  name: promotion-gate
+  rerun_command: /test this
+  run_after_success: null
+  run_if_changed: ""    
+  skip_branches: null
+  skip_report: false
+  build_spec:
+    source:
+    subPath: foo  
+    steps:
+    - args: 
+      - sleep
+      - "20"
+    image: jenkinsxio/builder-base:latest
+    trigger: (?m)^/test( all| this),?(\\s+|$)
+
+push_gateway: {}
+
+sinker:
+  resync_period: 1m
+  max_prowjob_age: 48h
+  max_pod_age: 30m
+
+tide:
+  context_options:
+    from-branch-protection: true
+  skip-unknown-contexts:
+    true
+  queries:
+  - labels:
+    - approved
+    missingLabels:
+    - do-not-merge
+    - do-not-merge/hold
+    - do-not-merge/work-in-progress
+    - needs-ok-to-test
+    - needs-rebase
+    repos:
+    - jenkins-x-bot/environment-jenkinsx-dev-production  
+    - jenkins-x/jx
+    - rawlingsj/prow-test2
+  target_url: https://tide.foo.bar\n

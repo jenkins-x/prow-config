@@ -1,0 +1,81 @@
+plugins.yaml: |
+  approve:
+  - lgtm_acts_as_approve: true
+    repos:
+    - jenkins-x-bot/environment-jenkinsx-dev-staging
+    - jenkins-x/jx-release-version
+    - rawlingsj/prow-test2
+    review_acts_as_approve: true
+  - lgtm_acts_as_approve: true
+    repos:
+    - jenkins-x-bot/environment-jenkinsx-dev-production
+    - rawlingsj/prow-test2
+    - jenkins-x/jx-release-version
+    review_acts_as_approve: true
+  blunderbuss: {}
+  cat: {}
+  config_updater: {}
+  heart: {}
+  owners: {}
+  plugins:
+    jenkins-x-bot/environment-jenkinsx-dev-production:
+    - approve
+    - assign
+    - blunderbuss
+    - help
+    - hold
+    - lgtm
+    - lifecycle
+    - size
+    - trigger
+    - wip
+    jenkins-x-bot/environment-jenkinsx-dev-staging:
+    - approve
+    - assign
+    - blunderbuss
+    - help
+    - hold
+    - lgtm
+    - lifecycle
+    - size
+    - trigger
+    - wip
+    jenkins-x/jx:
+    - approve
+    - assign
+    - blunderbuss
+    - help
+    - hold
+    - lgtm
+    - lifecycle
+    - size
+    - trigger
+    - wip
+    jenkins-x/jx-release-version:
+    - approve
+    - assign
+    - blunderbuss
+    - help
+    - hold
+    - lgtm
+    - lifecycle
+    - size
+    - trigger
+    - wip
+    rawlingsj/prow-test2:
+    - approve
+    - assign
+    - blunderbuss
+    - help
+    - hold
+    - lgtm
+    - lifecycle
+    - size
+    - trigger
+    - wip
+    - cat
+    - dog
+  requiresig: {}
+  sigmention: {}
+  slack: {}
+  welcome: {}
