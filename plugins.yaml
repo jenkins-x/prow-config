@@ -47,6 +47,7 @@ plugins.yaml: |
     - wip
     jenkins-x/jx:
     - approve
+    - heart
     - assign
     - blunderbuss
     - help
