@@ -41,7 +41,7 @@ presubmits:
     steps:
     - args: 
       - sleep
-      - "20"
+      - "10"
     image: jenkinsxio/builder-base:latest
     trigger: (?m)^/test( all| this),?(\\s+|$)
 
