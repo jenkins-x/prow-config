@@ -22,33 +22,33 @@ pod_namespace: jx
 presubmits:
   rawlingsj/prow-test2:
   - agent: build
-  branches:
-    - master
-  cluster: ""
-  context: promotion-gate
-
-  labels: null
-  max_concurrency: 0
-  name: promotion-gate
-  rerun_command: /test this
-  run_after_success: null
-  run_if_changed: ""    
-  skip_branches: null
-  skip_report: false
-  build_spec:
-    source:
-    subPath: foo  
-    steps:
-    - args: 
-      - sleep
-      - "10"
-    image: jenkinsxio/builder-base:latest
-    trigger: (?m)^/test( all| this),?(\\s+|$)
+    branches:
+        - master
+    cluster: ""
+    context: promotion-gate
+    
+    labels: null
+    max_concurrency: 0
+    name: promotion-gate
+    rerun_command: /test this
+    run_after_success: null
+    run_if_changed: ""    
+    skip_branches: null
+    skip_report: false
+    build_spec:
+      source:
+      subPath: foo  
+      steps:
+      - args: 
+        - sleep
+        - "10"
+        image: jenkinsxio/builder-base:latest
+        trigger: (?m)^/test( all| this),?(\\s+|$)
 
 push_gateway: {}
 
 sinker:
-  resync_period: 1m
+  resync_period: 2m
   max_prowjob_age: 48h
   max_pod_age: 30m
 
