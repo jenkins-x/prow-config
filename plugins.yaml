@@ -23,6 +23,8 @@ plugins.yaml: |
   heart: {}
   owners: {}
   plugins:
+    jenkins-x/prow-config:
+    - config-updater
     jenkins-x-bot/environment-jenkinsx-dev-production:
     - approve
     - assign
@@ -57,7 +59,6 @@ plugins.yaml: |
     - size
     - trigger
     - wip
-    - config-updater
     jenkins-x/jx-release-version:
     - approve
     - assign
@@ -82,7 +83,6 @@ plugins.yaml: |
     - wip
     - cat
     - dog
-    - config-updater
     - heart
   requiresig: {}
   sigmention: {}
