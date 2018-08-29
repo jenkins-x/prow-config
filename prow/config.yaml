@@ -44,29 +44,7 @@ presubmits:
         image: jenkinsxio/builder-base:latest
         trigger: (?m)^/test( all| this),?(\\s+|$)
 
-  jenkins-x/jx:
-  - agent: build
-    branches:
-        - master
-    cluster: ""
-    context: go-1.11-ci
-    labels: null
-    max_concurrency: 0
-    name: go-1.11-ci
-    rerun_command: /test go 1.11
-    run_after_success: null
-    run_if_changed: ""    
-    skip_branches: null
-    skip_report: false
-    build_spec:
-      source:
-      subPath: foo  
-      steps:
-      - args: 
-        - make
-        - build
-        image: golang:1.11-stretch
-        trigger: (?m)^/test( all| go 1.11),?(\\s+|$)
+
 
 push_gateway: {}
 
