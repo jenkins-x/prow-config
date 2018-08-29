@@ -35,13 +35,9 @@ presubmits:
     skip_branches: null
     skip_report: false
     build_spec:
-      source:
-        subPath: foo
       steps:
-      - args:
-        - sleep
-        - "20"
-        image: jenkinsxio/builder-base:latest
+      - image: jenkinsxio/builder-base:latest
+        args: ['sleep', '20']
     trigger: (?m)^/test( all| this),?(\s+|$)
 
 push_gateway: {}
