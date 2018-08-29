@@ -1,4 +1,7 @@
 plugins.yaml: |
+  triggers:
+  - repos:
+    - jenkins-x/prow-config
   approve:
   - lgtm_acts_as_approve: true
     repos:
@@ -25,6 +28,10 @@ plugins.yaml: |
   plugins:
     jenkins-x/prow-config:
     - config-updater
+    - size
+    - shrug
+    - skip
+    - yuks
     jenkins-x-bot/environment-jenkinsx-dev-production:
     - approve
     - assign
