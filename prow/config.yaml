@@ -23,7 +23,7 @@ presubmits:
   rawlingsj/prow-test2:
   - agent: build
     branches:
-        - master
+    - master
     cluster: ""
     context: promotion-gate
     labels: null
@@ -31,20 +31,18 @@ presubmits:
     name: promotion-gate
     rerun_command: /test this
     run_after_success: null
-    run_if_changed: ""    
+    run_if_changed: ""
     skip_branches: null
     skip_report: false
     build_spec:
       source:
-      subPath: foo  
+        subPath: foo
       steps:
-      - args: 
+      - args:
         - sleep
-        - "10"
+        - "20"
         image: jenkinsxio/builder-base:latest
-        trigger: (?m)^/test( all| this),?(\\s+|$)
-
-
+    trigger: (?m)^/test( all| this),?(\s+|$)
 
 push_gateway: {}
 
