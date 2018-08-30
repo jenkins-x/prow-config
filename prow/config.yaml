@@ -17,6 +17,7 @@ owners_dir_blacklist:
   default: null
   repos: null
 
+prowjob_namespace: jx
 pod_namespace: jx
 
 presubmits:
