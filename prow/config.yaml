@@ -5,9 +5,19 @@ branch-protection:
       protect: true
       required_status_checks:
         contexts:
-        - promotion-gate
+        - ci
         repos:
-          prow-test2:
+          spring-prow1:
+            required_status_checks:
+              strict: true
+              contexts:
+              - ci
+          environment-dukepepper-production:
+            required_status_checks:
+              strict: true
+              contexts:
+              - promotion-gate
+          environment-dukepepper-staging:
             required_status_checks:
               strict: true
               contexts:
@@ -20,10 +30,29 @@ owners_dir_blacklist:
 pod_namespace: jx
 
 presubmits:
-  rawlingsj/prow-test2:
+  rawlingsj/spring-prow1:
   - agent: build
     branches:
-    - master
+        - master
+    cluster: ""
+    context: ci
+    labels: null
+    max_concurrency: 0
+    name: ci
+    rerun_command: /test this
+    run_after_success: null
+    run_if_changed: ""    
+    skip_branches: null
+    skip_report: false
+    build_spec:
+      steps:
+      - image: rawlingsj/cwp-jenkinsfile-runner-demo:dev1
+        trigger: (?m)^/test( all| this),?(\\s+|$)
+    
+  rawlingsj/environment-dukepepper-staging:
+  - agent: kubernetes
+    always_run: true
+    branches: null
     cluster: ""
     context: promotion-gate
     labels: null
@@ -34,12 +63,148 @@ presubmits:
     run_if_changed: ""
     skip_branches: null
     skip_report: false
-    build_spec:
-      steps:
-      - image: jenkinsxio/builder-base:latest
-        args: ['sleep', '20']
+    spec:
+      containers:
+      - args:
+        - jx
+        - step
+        - helm
+        - build
+        env:
+        - name: DEPLOY_NAMESPACE
+          value: jx-staging
+        - name: CHART_REPOSITORY
+          value: http://jenkins-x-chartmuseum:8080
+        - name: XDG_CONFIG_HOME
+          value: /home/jenkins
+        - name: GIT_COMMITTER_EMAIL
+          value: jenkins-x@googlegroups.com
+        - name: GIT_AUTHOR_EMAIL
+          value: jenkins-x@googlegroups.com
+        - name: GIT_AUTHOR_NAME
+          value: jenkins-x-bot
+        - name: GIT_COMMITTER_NAME
+          value: jenkins-x-bot
+        image: jenkinsxio/builder-base:latest
+        name: ""
+        resources: {}
+      serviceAccountName: jenkins
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  rawlingsj/environment-dukepepper-production:
+  - agent: kubernetes
+    always_run: true
+    branches: null
+    cluster: ""
+    context: promotion-gate
+    labels: null
+    max_concurrency: 0
+    name: promotion-gate
+    rerun_command: /test this
+    run_after_success: null
+    run_if_changed: ""
+    skip_branches: null
+    skip_report: false
+    spec:
+      containers:
+      - args:
+        - jx
+        - step
+        - helm
+        - build
+        env:
+        - name: DEPLOY_NAMESPACE
+          value: jx-staging
+        - name: CHART_REPOSITORY
+          value: http://jenkins-x-chartmuseum:8080
+        - name: XDG_CONFIG_HOME
+          value: /home/jenkins
+        - name: GIT_COMMITTER_EMAIL
+          value: jenkins-x@googlegroups.com
+        - name: GIT_AUTHOR_EMAIL
+          value: jenkins-x@googlegroups.com
+        - name: GIT_AUTHOR_NAME
+          value: jenkins-x-bot
+        - name: GIT_COMMITTER_NAME
+          value: jenkins-x-bot
+        image: jenkinsxio/builder-base:latest
+        name: ""
+        resources: {}
+      serviceAccountName: jenkins
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  postsubmits:
+    rawlingsj/environment-dukepepper-staging:
+    - agent: kubernetes
+      branches: null
+      cluster: ""
+      labels: null
+      max_concurrency: 0
+      name: test-postsubmits
+      run_after_success: null
+      skip_branches: null
+      spec:
+        containers:
+        - args:
+          - jx
+          - step
+          - helm
+          - apply
+          env:
+          - name: DEPLOY_NAMESPACE
+            value: jx-staging
+          - name: CHART_REPOSITORY
+            value: http://jenkins-x-chartmuseum:8080
+          - name: XDG_CONFIG_HOME
+            value: /home/jenkins
+          - name: GIT_COMMITTER_EMAIL
+            value: jenkins-x@googlegroups.com
+          - name: GIT_AUTHOR_EMAIL
+            value: jenkins-x@googlegroups.com
+          - name: GIT_AUTHOR_NAME
+            value: jenkins-x-bot
+          - name: GIT_COMMITTER_NAME
+            value: jenkins-x-bot
+          image: jenkinsxio/builder-base:latest
+          name: ""
+          resources: {}
+        serviceAccountName: jenkins
+
+    rawlingsj/environment-dukepepper-production:
+    - agent: kubernetes
+      branches: null
+      cluster: ""
+      labels: null
+      max_concurrency: 0
+      name: test-postsubmits
+      run_after_success: null
+      skip_branches: null
+      spec:
+        containers:
+        - args:
+          - jx
+          - step
+          - helm
+          - apply
+          env:
+          - name: DEPLOY_NAMESPACE
+            value: jx-staging
+          - name: CHART_REPOSITORY
+            value: http://jenkins-x-chartmuseum:8080
+          - name: XDG_CONFIG_HOME
+            value: /home/jenkins
+          - name: GIT_COMMITTER_EMAIL
+            value: jenkins-x@googlegroups.com
+          - name: GIT_AUTHOR_EMAIL
+            value: jenkins-x@googlegroups.com
+          - name: GIT_AUTHOR_NAME
+            value: jenkins-x-bot
+          - name: GIT_COMMITTER_NAME
+            value: jenkins-x-bot
+          image: jenkinsxio/builder-base:latest
+          name: ""
+          resources: {}
+        serviceAccountName: jenkins
 push_gateway: {}
 
 sinker:
@@ -62,7 +227,6 @@ tide:
     - needs-ok-to-test
     - needs-rebase
     repos:
-    - jenkins-x-bot/environment-jenkinsx-dev-production  
-    - jenkins-x/jx
-    - rawlingsj/prow-test2
-  target_url: https://tide.foo.bar\n
+    - rawlingsj/spring-prow1:
+  target_url: https://tide.foo.bar
+

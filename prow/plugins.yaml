@@ -1,18 +1,14 @@
 triggers:
 - repos:
   - jenkins-x/prow-config
+  - rawlingsj/environment-dukepepper-staging
+  - rawlingsj/environment-dukepepper-production
 approve:
 - lgtm_acts_as_approve: true
   repos:
-  - jenkins-x-bot/environment-jenkinsx-dev-staging
-  - jenkins-x/jx-release-version
-  - rawlingsj/prow-test2
-  review_acts_as_approve: true
-- lgtm_acts_as_approve: true
-  repos:
-  - jenkins-x-bot/environment-jenkinsx-dev-production
-  - rawlingsj/prow-test2
-  - jenkins-x/jx-release-version
+  - rawlingsj/spring-prow1
+  - rawlingsj/environment-dukepepper-staging
+  - rawlingsj/environment-dukepepper-production
   review_acts_as_approve: true
 blunderbuss: {}
 cat: {}
@@ -25,47 +21,24 @@ config_updater:
 heart: {}
 owners: {}
 plugins:
-  jenkins-x/prow-config:
+  rawlingsj/prow-dukepepper-jx-config:
   - config-updater
-  - size
   - shrug
   - skip
   - yuks
-  jenkins-x-bot/environment-jenkinsx-dev-production:
+  rawlingsj/spring-prow1:
   - approve
   - assign
   - blunderbuss
   - help
   - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  jenkins-x-bot/environment-jenkinsx-dev-staging:
-  - approve
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  jenkins-x/jx:
-  - approve
   - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
   - lgtm
   - lifecycle
   - size
   - trigger
   - wip
-  jenkins-x/jx-release-version:
+  rawlingsj/environment-dukepepper-staging:
   - approve
   - assign
   - blunderbuss
@@ -76,7 +49,7 @@ plugins:
   - size
   - trigger
   - wip
-  rawlingsj/prow-test2:
+  rawlingsj/environment-dukepepper-production:
   - approve
   - assign
   - blunderbuss
@@ -87,9 +60,6 @@ plugins:
   - size
   - trigger
   - wip
-  - cat
-  - dog
-  - heart
 requiresig: {}
 sigmention: {}
 slack: {}
