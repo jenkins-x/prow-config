@@ -20,6 +20,10 @@ owners_dir_blacklist:
 prowjob_namespace: jx
 pod_namespace: jx
 
+heart:
+  adorees:
+  - jenkins-x-bot
+
 presubmits:
   rawlingsj/prow-test2:
   - agent: build
