@@ -1,17 +1,4 @@
 branch-protection:
-  allow_disabled_policies: true  # TODO(fejta): remove, needed by k/website
-  orgs:
-    rawlingsj: 
-      protect: true
-      required_status_checks:
-        contexts:
-        - promotion-gate
-        repos:
-          prow-test2:
-            required_status_checks:
-              strict: true
-              contexts:
-              - promotion-gate
 
 owners_dir_blacklist:
   default: null
@@ -23,27 +10,6 @@ pod_namespace: jx
 heart:
   adorees:
   - jenkins-x-bot
-
-presubmits:
-  rawlingsj/prow-test2:
-  - agent: build
-    branches:
-    - master
-    cluster: ""
-    context: promotion-gate
-    labels: null
-    max_concurrency: 0
-    name: promotion-gate
-    rerun_command: /test this
-    run_after_success: null
-    run_if_changed: ""
-    skip_branches: null
-    skip_report: false
-    build_spec:
-      steps:
-      - image: jenkinsxio/builder-base:latest
-        args: ['sleep', '20']
-    trigger: (?m)^/test( all| this),?(\s+|$)
 
 push_gateway: {}
 
@@ -67,7 +33,7 @@ tide:
     - needs-ok-to-test
     - needs-rebase
     repos:
-    - jenkins-x-bot/environment-jenkinsx-dev-production  
+    - jenkins-x-bot/environment-jenkinsx-dev-staging
+    - jenkins-x-bot/environment-jenkinsx-dev-production
     - jenkins-x/jx
-    - rawlingsj/prow-test2
   target_url: https://tide.foo.bar\n
