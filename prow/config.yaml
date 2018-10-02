@@ -29,7 +29,7 @@ sinker:
   max_pod_age: 30m
 
 postsubmits:
-  rawlingsj/prow-testapp:
+  jenkins-x/jx:
   - agent: knative-build
     branches:
     - master
