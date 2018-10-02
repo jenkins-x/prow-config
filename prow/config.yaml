@@ -4,7 +4,7 @@ branch-protection:
       protect: true
       required_status_checks:
         contexts:
-        - jenkins-engine-ci
+        - serverless-jenkins
       repos:
         jx:
           restrictions:
@@ -17,16 +17,12 @@ owners_dir_blacklist:
 prowjob_namespace: jx
 pod_namespace: jx
 
-heart:
-  adorees:
-  - jenkins-x-bot
-
 push_gateway: {}
 
 sinker:
   resync_period: 4m
-  max_prowjob_age: 48h
-  max_pod_age: 30m
+  max_prowjob_age: 2h
+  max_pod_age: 20m
 
 postsubmits:
   jenkins-x/jx:
@@ -55,7 +51,7 @@ postsubmits:
               key: docker.registry
               name: jenkins-x-docker-registry
         image: jenkinsxio/jenkins-go:dev_18
-        name: ""
+        name: "release"
         resources: {}
         volumeMounts:
         - mountPath: /home/jenkins/.docker
@@ -88,6 +84,16 @@ presubmits:
       serviceAccountName: jenkins
       steps:
       - env:
+        - name: GIT_COMMITTER_EMAIL
+          value: jenkins-x@googlegroups.com
+        - name: GIT_AUTHOR_EMAIL
+          value: jenkins-x@googlegroups.com
+        - name: GIT_AUTHOR_NAME
+          value: jenkins-x-bot
+        - name: GIT_COMMITTER_NAME
+          value: jenkins-x-bot
+        - name: XDG_CONFIG_HOME
+          value: /home/jenkins
         - name: DOCKER_CONFIG
           value: /home/jenkins/.docker/
         - name: DOCKER_REGISTRY
@@ -96,7 +102,7 @@ presubmits:
               key: docker.registry
               name: jenkins-x-docker-registry
         image: jenkinsxio/jenkins-go:dev_18
-        name: ""
+        name: "continuous-integration"
         resources: {}
         volumeMounts:
         - mountPath: /home/jenkins/.docker
@@ -120,8 +126,8 @@ presubmits:
       - name: jenkins-release-gpg
         secret:
           secretName: jenkins-release-gpg
-    context: jenkins-engine-ci
-    name: jenkins-engine-ci
+    context: serverless-jenkins
+    name: serverless-jenkins
     rerun_command: /test bdd
     trigger: (?m)^/test( all| bdd),?(\s+|$)
 
@@ -130,8 +136,7 @@ tide:
   status_update_period: 30s
   context_options:
     from-branch-protection: true
-  skip-unknown-contexts:
-    false
+  skip-unknown-contexts: false
   queries:
   - labels:
     - approved

@@ -15,7 +15,11 @@ config_updater:
       name: config
     prow/plugins.yaml:
       name: plugins
-heart: {}
+
+heart:
+  adorees:
+  - jenkins-x-bot
+
 owners: {}
 plugins:
   jenkins-x/prow-config:
