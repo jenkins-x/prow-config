@@ -52,7 +52,13 @@ postsubmits:
               name: jenkins-x-docker-registry
         image: jenkinsxio/jenkins-go:dev_18
         name: "release"
-        resources: {}
+        resources:
+          limits:
+            cpu: "2"
+            memory: 3Gi
+          requests:
+            cpu: 1m
+            memory: 2Gi
         volumeMounts:
         - mountPath: /home/jenkins/.docker
           name: jenkins-docker-cfg
@@ -103,7 +109,13 @@ presubmits:
               name: jenkins-x-docker-registry
         image: jenkinsxio/jenkins-go:dev_18
         name: "continuous-integration"
-        resources: {}
+        resources:
+          limits:
+            cpu: "2"
+            memory: 3Gi
+          requests:
+            cpu: 1m
+            memory: 2Gi
         volumeMounts:
         - mountPath: /home/jenkins/.docker
           name: jenkins-docker-cfg
