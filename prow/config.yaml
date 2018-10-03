@@ -111,10 +111,10 @@ presubmits:
         name: "continuous-integration"
         resources:
           limits:
-            cpu: "2"
-            memory: 3Gi
+            cpu: "3"
+            memory: 4Gi
           requests:
-            cpu: 1m
+            cpu: 2m
             memory: 2Gi
         volumeMounts:
         - mountPath: /home/jenkins/.docker
