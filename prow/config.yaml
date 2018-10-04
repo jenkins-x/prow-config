@@ -9,21 +9,16 @@ branch-protection:
         jx:
           restrictions:
             users: []
-
 owners_dir_blacklist:
   default: null
   repos: null
-
 prowjob_namespace: jx
 pod_namespace: jx
-
 push_gateway: {}
-
 sinker:
   resync_period: 4m
-  max_prowjob_age: 2h
-  max_pod_age: 20m
-
+  max_prowjob_age: 4h
+  max_pod_age: 4h
 postsubmits:
   jenkins-x/jx:
   - agent: knative-build
@@ -54,11 +49,11 @@ postsubmits:
         name: "release"
         resources:
           limits:
-            cpu: "3"
+            cpu: 3
             memory: 4Gi
           requests:
-            cpu: "2"
-            memory: 2Gi
+            cpu: 2
+            memory: 3Gi
         volumeMounts:
         - mountPath: /home/jenkins/.docker
           name: jenkins-docker-cfg
@@ -111,10 +106,10 @@ presubmits:
         name: "continuous-integration"
         resources:
           limits:
-            cpu: "3"
+            cpu: 3
             memory: 4Gi
           requests:
-            cpu: "2"
+            cpu: 2
             memory: 2Gi
         volumeMounts:
         - mountPath: /home/jenkins/.docker
@@ -142,10 +137,9 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test bdd
     trigger: (?m)^/test( all| bdd),?(\s+|$)
-
 tide:
-  sync_period: 5m
-  status_update_period: 30s
+  sync_period: 2m
+  status_update_period: 1m
   context_options:
     from-branch-protection: true
   skip-unknown-contexts: false
