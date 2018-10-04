@@ -17,8 +17,8 @@ pod_namespace: jx
 push_gateway: {}
 sinker:
   resync_period: 4m
-  max_prowjob_age: 4h
-  max_pod_age: 4h
+  max_prowjob_age: 24h
+  max_pod_age: 24h
 postsubmits:
   jenkins-x/jx:
   - agent: knative-build
