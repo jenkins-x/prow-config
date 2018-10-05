@@ -1,6 +1,7 @@
 triggers:
 - repos:
   - jenkins-x/prow-config
+  - jenkins-x/jenkins-x-serverless
 approve:
 - lgtm_acts_as_approve: true
   repos:
@@ -72,6 +73,7 @@ plugins:
   - size
   - trigger
   - wip
+  - cat
 requiresig: {}
 sigmention: {}
 slack: {}
