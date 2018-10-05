@@ -219,7 +219,7 @@ presubmits:
             configMapKeyRef:
               key: docker.registry
               name: jenkins-x-docker-registry
-        image: jenkinsxio/jenkins-go:dev_18
+        image: jenkinsxio/jenkins-cwp:dev_22
         name: "continuous-integration"
         resources:
           limits:
