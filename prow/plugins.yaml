@@ -60,6 +60,18 @@ plugins:
   - size
   - trigger
   - wip
+  jenkins-x/jenkins-x-serverless:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
 requiresig: {}
 sigmention: {}
 slack: {}
