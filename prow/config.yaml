@@ -77,6 +77,64 @@ postsubmits:
         secret:
           secretName: jenkins-release-gpg
     name: release
+  jenkins-x/jenkins-x-serverless:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      steps:
+      - env:
+        - name: GIT_COMMITTER_EMAIL
+          value: jenkins-x@googlegroups.com
+        - name: GIT_AUTHOR_EMAIL
+          value: jenkins-x@googlegroups.com
+        - name: GIT_AUTHOR_NAME
+          value: jenkins-x-bot
+        - name: GIT_COMMITTER_NAME
+          value: jenkins-x-bot
+        - name: XDG_CONFIG_HOME
+          value: /home/jenkins
+        - name: DOCKER_CONFIG
+          value: /home/jenkins/.docker/
+        - name: DOCKER_REGISTRY
+          valueFrom:
+            configMapKeyRef:
+              key: docker.registry
+              name: jenkins-x-docker-registry
+        image: jenkinsxio/jenkins-cwp:dev_22
+        name: "release"
+        resources:
+          limits:
+            cpu: 3
+            memory: 4Gi
+          requests:
+            cpu: 2
+            memory: 2Gi
+        volumeMounts:
+        - mountPath: /home/jenkins/.docker
+          name: jenkins-docker-cfg
+        - mountPath: /var/run/docker.sock
+          name: docker-sock-volume
+        - mountPath: /root/.m2/
+          name: jenkins-maven-settings
+        - mountPath: /home/jenkins/.gnupg
+          name: jenkins-release-gpg
+      volumes:
+      - name: jenkins-docker-cfg
+        secret:
+          secretName: jenkins-docker-cfg
+      - hostPath:
+          path: /var/run/docker.sock
+        name: docker-sock-volume
+      - name: jenkins-maven-settings
+        secret:
+          secretName: jenkins-maven-settings
+      - name: jenkins-release-gpg
+        secret:
+          secretName: jenkins-release-gpg
+    name: release
+
 presubmits:
   jenkins-x/jx:
   - agent: knative-build
@@ -137,6 +195,66 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test bdd
     trigger: (?m)^/test( all| bdd),?(\s+|$)
+  jenkins-x/jenkins-x-serverless:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      steps:
+      - env:
+        - name: GIT_COMMITTER_EMAIL
+          value: jenkins-x@googlegroups.com
+        - name: GIT_AUTHOR_EMAIL
+          value: jenkins-x@googlegroups.com
+        - name: GIT_AUTHOR_NAME
+          value: jenkins-x-bot
+        - name: GIT_COMMITTER_NAME
+          value: jenkins-x-bot
+        - name: XDG_CONFIG_HOME
+          value: /home/jenkins
+        - name: DOCKER_CONFIG
+          value: /home/jenkins/.docker/
+        - name: DOCKER_REGISTRY
+          valueFrom:
+            configMapKeyRef:
+              key: docker.registry
+              name: jenkins-x-docker-registry
+        image: jenkinsxio/jenkins-go:dev_18
+        name: "continuous-integration"
+        resources:
+          limits:
+            cpu: 3
+            memory: 4Gi
+          requests:
+            cpu: 2
+            memory: 2Gi
+        volumeMounts:
+        - mountPath: /home/jenkins/.docker
+          name: jenkins-docker-cfg
+        - mountPath: /var/run/docker.sock
+          name: docker-sock-volume
+        - mountPath: /root/.m2/
+          name: jenkins-maven-settings
+        - mountPath: /home/jenkins/.gnupg
+          name: jenkins-release-gpg
+      volumes:
+      - name: jenkins-docker-cfg
+        secret:
+          secretName: jenkins-docker-cfg
+      - hostPath:
+          path: /var/run/docker.sock
+        name: docker-sock-volume
+      - name: jenkins-maven-settings
+        secret:
+          secretName: jenkins-maven-settings
+      - name: jenkins-release-gpg
+        secret:
+          secretName: jenkins-release-gpg
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test bdd
+    trigger: (?m)^/test( all| bdd),?(\s+|$)
+
 tide:
   sync_period: 2m
   status_update_period: 1m
@@ -156,4 +274,5 @@ tide:
     - jenkins-x-bot/environment-jenkinsx-dev-staging
     - jenkins-x-bot/environment-jenkinsx-dev-production
     - jenkins-x/jx
+    - jenkins-x/jenkins-x-serverless
   target_url: https://deck.jx.cd.jenkins-x.io
