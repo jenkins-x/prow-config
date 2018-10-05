@@ -1,7 +1,6 @@
 triggers:
 - repos:
   - jenkins-x/prow-config
-  - jenkins-x/jenkins-x-serverless
 approve:
 - lgtm_acts_as_approve: true
   repos:
@@ -62,6 +61,19 @@ plugins:
   - trigger
   - wip
   jenkins-x/jenkins-x-serverless:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  jenkins-x-charts/vault-operator:
   - approve
   - heart
   - assign
