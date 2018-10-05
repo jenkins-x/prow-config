@@ -155,10 +155,10 @@ postsubmits:
         resources:
           limits:
             cpu: 0.2
-            memory: 128Mb
+            memory: 128Mi
           requests:
             cpu: 0.1
-            memory: 74Mb
+            memory: 74Mi
       - env:
         - name: GIT_COMMITTER_EMAIL
           value: jenkins-x@googlegroups.com
@@ -180,10 +180,10 @@ postsubmits:
         resources:
           limits:
             cpu: 0.2
-            memory: 128Mb
+            memory: 128Mi
           requests:
             cpu: 0.1
-            memory: 74Mb
+            memory: 74Mi
       - env:
         - name: CHARTMUSEUM_CREDS_USR
           valueFrom:
@@ -203,10 +203,10 @@ postsubmits:
         resources:
           limits:
             cpu: 0.2
-            memory: 128Mb
+            memory: 128Mi
           requests:
             cpu: 0.1
-            memory: 74Mb
+            memory: 74Mi
     name: release
 
 presubmits:
@@ -342,10 +342,10 @@ presubmits:
         resources:
           limits:
             cpu: 0.2
-            memory: 128Mb
+            memory: 128Mi
           requests:
             cpu: 0.1
-            memory: 74Mb
+            memory: 74Mi
     context: serverless-jenkins
     name: serverless-jenkins
     rerun_command: /test this
