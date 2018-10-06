@@ -262,6 +262,7 @@ postsubmits:
           requests:
             cpu: 0.1
             memory: 74Mi
+        workingDir: /workspace/vault-operator
     name: release
 
 presubmits:
@@ -447,8 +448,6 @@ presubmits:
   - agent: knative-build
     always_run: false
     build_spec:
-      source:
-        subPath: vault-operator
       steps:
       - image: jenkinsxio/builder-base:0.0.623
         name: "continuous-integration"
@@ -462,6 +461,7 @@ presubmits:
           requests:
             cpu: 0.1
             memory: 74Mi
+        workingDir: /workspace/vault-operator
     context: serverless-jenkins
     name: serverless-jenkins
     rerun_command: /test this
