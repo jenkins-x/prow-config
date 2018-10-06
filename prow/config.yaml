@@ -199,12 +199,13 @@ postsubmits:
     build_spec:
       serviceAccountName: jenkins
       steps:
-      - image: jenkinsxio/jx:1.3.379
+      - image: jenkinsxio/builder-base:0.0.623
         env:
         - name: XDG_CONFIG_HOME
           value: /home/jenkins
         name: "credentials"
         args:
+        - jx
         - step
         - git
         - credentials
@@ -226,9 +227,10 @@ postsubmits:
           value: jenkins-x-bot
         - name: XDG_CONFIG_HOME
           value: /home/jenkins
-        image: jenkinsxio/jx:1.3.379
+        image: jenkinsxio/builder-base:0.0.623
         name: "tag"
         args:
+        - jx
         - step
         - next-version
         - -t
