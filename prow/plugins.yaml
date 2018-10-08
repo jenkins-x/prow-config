@@ -99,6 +99,19 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x/dex:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
 requiresig: {}
 sigmention: {}
 slack: {}
