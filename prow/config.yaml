@@ -9,6 +9,15 @@ branch-protection:
         jx:
           restrictions:
             users: []
+    jenkins-x-charts:
+      protect: true
+      required_status_checks:
+        contexts:
+        - knative-build
+      repos:
+        vault-operator:
+          restrictions:
+            users: []
 owners_dir_blacklist:
   default: null
   repos: null
