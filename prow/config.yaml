@@ -223,6 +223,7 @@ postsubmits:
           requests:
             cpu: 100m
             memory: 74Mi
+        workingDir: /workspace/vault-operator
       - env:
         - name: CHARTMUSEUM_CREDS_USR
           valueFrom:
@@ -446,8 +447,8 @@ presubmits:
             cpu: 0.1
             memory: 74Mi
         workingDir: /workspace/vault-operator
-    context: serverless-jenkins
-    name: serverless-jenkins
+    context: knative-build
+    name: knative-build
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
