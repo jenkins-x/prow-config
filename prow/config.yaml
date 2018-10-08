@@ -45,11 +45,11 @@ postsubmits:
         - name: BUILDER
           value: jenkins-go
         - name: LIMIT_CPU
-          value: 3
+          value: "3"
         - name: LIMIT_MEMORY
           value: 4Gi
         - name: REQUEST_CPU
-          value: 2
+          value: "2"
         - name: REQUEST_MEMORY
           value: 2Gi
     name: release
@@ -118,11 +118,11 @@ presubmits:
         - name: BUILDER
           value: jenkins-go
         - name: LIMIT_CPU
-          value: 3
+          value: "3"
         - name: LIMIT_MEMORY
           value: 4Gi
         - name: REQUEST_CPU
-          value: 2
+          value: "2"
         - name: REQUEST_MEMORY
           value: 2Gi
     context: serverless-jenkins
