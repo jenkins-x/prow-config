@@ -154,4 +154,8 @@ plugins:
 requiresig: {}
 sigmention: {}
 slack: {}
-welcome: {}
+welcome:
+- repos:
+  - jenkins-x/jx
+  message_template: "Welcome @{{.AuthorLogin}}! It looks like this is your first PR to {{.Org}}/{{.Repo}} 🎉🎉"
+
