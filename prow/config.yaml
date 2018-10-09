@@ -9,6 +9,9 @@ branch-protection:
         jx:
           restrictions:
             users: []
+        dex:
+          restrictions:
+            users: []
     jenkins-x-charts:
       protect: true
       required_status_checks:
@@ -455,6 +458,7 @@ tide:
     - jenkins-x-bot/environment-jenkinsx-dev-staging
     - jenkins-x-bot/environment-jenkinsx-dev-production
     - jenkins-x/jx
+    - jenkins-x/dex
     - jenkins-x/jenkins-x-builders
     - jenkins-x/jenkins-x-serverless
     - jenkins-x-charts/vault-operator
