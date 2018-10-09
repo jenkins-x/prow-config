@@ -112,6 +112,19 @@ plugins:
   - trigger
   - wip
   - cat
+  rawlingsj/testchart:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
 requiresig: {}
 sigmention: {}
 slack: {}
