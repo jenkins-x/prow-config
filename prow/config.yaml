@@ -217,6 +217,19 @@ postsubmits:
           value: jenkins-go
     name: release
 
+  rawlingsj/testchart:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins
+        arguments:
+        - name: BUILDER
+          value: jenkins-go
+    name: release
+
   jenkins-x-charts/vault-operator:
   - agent: knative-build
     branches:
@@ -425,6 +438,21 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  rawlingsj/testchart:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins
+        arguments:
+        - name: BUILDER
+          value: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x-charts/vault-operator:
   - agent: knative-build
     always_run: false
@@ -462,4 +490,5 @@ tide:
     - jenkins-x/jenkins-x-builders
     - jenkins-x/jenkins-x-serverless
     - jenkins-x-charts/vault-operator
+    - rawlingsj/testchart
   target_url: https://deck.jx.cd.jenkins-x.io
