@@ -54,9 +54,6 @@ branch-protection:
         jx-tutorial:
           required_status_checks:
             contexts: ["serverless-jenkins"]
-        knative-charts:
-          required_status_checks:
-            contexts: ["serverless-jenkins"]
         metrics:
           required_status_checks:
             contexts: ["serverless-jenkins"]
@@ -64,9 +61,6 @@ branch-protection:
           required_status_checks:
             contexts: ["serverless-jenkins"]
         pipeline-events-addon:
-          required_status_checks:
-            contexts: ["serverless-jenkins"]
-        prow:
           required_status_checks:
             contexts: ["serverless-jenkins"]
         sso-operator:
@@ -86,6 +80,20 @@ branch-protection:
         vault-operator:
           required_status_checks:
             contexts: ["knative-build"]
+        knative:
+          required_status_checks:
+            contexts: ["knative-build"]
+        prow:
+          required_status_checks:
+            contexts: ["knative-build"]
+    cloudbees:
+      repos:
+        cdx-backend:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
+        cdx-frontend:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
 
 owners_dir_blacklist:
   default: null
@@ -181,6 +189,33 @@ postsubmits:
         - name: WORKSPACE
           value: /workspace/vault-operator
     name: release
+
+  jenkins-x-charts/knative:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: knative-chart-release
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/knative-build
+    name: release
+
+  jenkins-x-charts/prow:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: knative-chart-release
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/prow
+    name: release
+
   jenkins-x/cloud-environments:
   - agent: knative-build
     branches:
@@ -271,15 +306,6 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-  jenkins-x/knative-charts:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: jenkins
-      template:
-        name: jenkins-base
-    name: release
   jenkins-x/metrics:
   - agent: knative-build
     branches:
@@ -299,15 +325,6 @@ postsubmits:
         name: jenkins-base
     name: release
   jenkins-x/pipeline-events-addon:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: jenkins
-      template:
-        name: jenkins-base
-    name: release
-  jenkins-x/prow:
   - agent: knative-build
     branches:
     - master
@@ -344,6 +361,25 @@ postsubmits:
         name: jenkins-maven
     name: release
   jenkins-x/vscode-jx-tools:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-javascript
+    name: release
+
+  cloudbees/cdx-backend:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release
+  cloudbees/cdx-frontend:
   - agent: knative-build
     branches:
     - master
@@ -452,6 +488,34 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  jenkins-x-charts/knative:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      template:
+        name: knative-chart-ci
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/knative-build
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  jenkins-x-charts/prow:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      template:
+        name: knative-chart-ci
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/prow
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x/cloud-environments:
   - agent: knative-build
     always_run: false
@@ -562,17 +626,6 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/knative-charts:
-  - agent: knative-build
-    always_run: false
-    build_spec:
-      serviceAccountName: jenkins
-      template:
-        name: jenkins-base
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/metrics:
   - agent: knative-build
     always_run: false
@@ -596,17 +649,6 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/pipeline-events-addon:
-  - agent: knative-build
-    always_run: false
-    build_spec:
-      serviceAccountName: jenkins
-      template:
-        name: jenkins-base
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/prow:
   - agent: knative-build
     always_run: false
     build_spec:
@@ -663,6 +705,30 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  cloudbees/cdx-backend:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  cloudbees/cdx-frontend:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-javascript
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
 tide:
   sync_period: 2m
   status_update_period: 1m
@@ -687,6 +753,8 @@ tide:
     - jenkins-x/jenkins-x-builders
     - jenkins-x/jenkins-x-serverless
     - jenkins-x-charts/vault-operator
+    - jenkins-x-charts/knative
+    - jenkins-x-charts/prow
     - rawlingsj/testchart
     - jenkins-x/ext-java-code-quality
     - jenkins-x/cloud-environments
@@ -699,13 +767,14 @@ tide:
     - jenkins-x/jx-java-client
     - jenkins-x/jx-release-version
     - jenkins-x/jx-tutorial
-    - jenkins-x/knative-charts
     - jenkins-x/metrics
     - jenkins-x/nexus
     - jenkins-x/pipeline-events-addon
-    - jenkins-x/prow
     - jenkins-x/sso-operator
     - jenkins-x/terraform-provider-jx
     - jenkins-x/updatebot
     - jenkins-x/vscode-jx-tools
+    - cloudbees/cdx-backend
+    - cloudbees/cdx-frontend
+    
   target_url: https://deck.jx.cd.jenkins-x.io
