@@ -201,6 +201,19 @@ postsubmits:
           secretName: jenkins-release-gpg
     name: release
 
+  jenkins-x/dex:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins
+        arguments:
+        - name: BUILDER
+          value: jenkins-go
+    name: release
+
   jenkins-x-charts/vault-operator:
   - agent: knative-build
     branches:
@@ -393,6 +406,21 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test bdd
     trigger: (?m)^/test( all| bdd),?(\s+|$)
+
+  jenkins-x/dex:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins
+        arguments:
+        - name: BUILDER
+          value: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
 
   jenkins-x-charts/vault-operator:
   - agent: knative-build
