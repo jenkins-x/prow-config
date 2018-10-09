@@ -281,7 +281,7 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x/knative-charts:
+  jenkins-x-charts/knative:
   - approve
   - heart
   - assign
@@ -333,7 +333,7 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x/prow:
+  jenkins-x-charts/prow:
   - approve
   - heart
   - assign
@@ -386,6 +386,32 @@ plugins:
   - wip
   - cat
   jenkins-x/vscode-jx-tools:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  cloudbees/cdx-backend:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  cloudbees/cdx-frontend:
   - approve
   - heart
   - assign
