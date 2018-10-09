@@ -12,6 +12,9 @@ branch-protection:
         dex:
           restrictions:
             users: []
+        ext-jacoco:
+          restrictions:
+            users: []     
     jenkins-x-charts:
       protect: true
       required_status_checks:
@@ -205,6 +208,19 @@ postsubmits:
     name: release
 
   jenkins-x/dex:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins
+        arguments:
+        - name: BUILDER
+          value: jenkins-go
+    name: release
+
+  jenkins-x/ext-jacoco:
   - agent: knative-build
     branches:
     - master
@@ -438,6 +454,21 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  jenkins-x/ext-jacoco:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins
+        arguments:
+        - name: BUILDER
+          value: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   rawlingsj/testchart:
   - agent: knative-build
     always_run: false
@@ -487,6 +518,7 @@ tide:
     - jenkins-x-bot/environment-jenkinsx-dev-production
     - jenkins-x/jx
     - jenkins-x/dex
+    - jenkins-x/ext-jacoco
     - jenkins-x/jenkins-x-builders
     - jenkins-x/jenkins-x-serverless
     - jenkins-x-charts/vault-operator
