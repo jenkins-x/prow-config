@@ -2,27 +2,9 @@ branch-protection:
   orgs:
     jenkins-x:
       protect: true
-      required_status_checks:
-        contexts:
-        - serverless-jenkins
-      repos:
-        jx:
-          restrictions:
-            users: []
-        dex:
-          restrictions:
-            users: []
-        ext-jacoco:
-        ext-java-code-quality:
     jenkins-x-charts:
       protect: true
-      required_status_checks:
-        contexts:
-        - knative-build
-      repos:
-        vault-operator:
-          restrictions:
-            users: []
+
 owners_dir_blacklist:
   default: null
   repos: null
@@ -72,10 +54,7 @@ postsubmits:
     build_spec:
       serviceAccountName: jenkins
       template:
-        name: jenkins
-        arguments:
-        - name: BUILDER
-          value: jenkins-go
+        name: jenkins-go
     name: release
 
   jenkins-x/ext-jacoco:
@@ -85,10 +64,7 @@ postsubmits:
     build_spec:
       serviceAccountName: jenkins
       template:
-        name: jenkins
-        arguments:
-        - name: BUILDER
-          value: jenkins-go
+        name: jenkins-go
     name: release
 
   jenkins-x/ext-java-code-quality:
@@ -98,10 +74,7 @@ postsubmits:
     build_spec:
       serviceAccountName: jenkins
       template:
-        name: jenkins
-        arguments:
-        - name: BUILDER
-          value: jenkins-go
+        name: jenkins-go
     name: release
 
   rawlingsj/testchart:
@@ -111,10 +84,7 @@ postsubmits:
     build_spec:
       serviceAccountName: jenkins
       template:
-        name: jenkins
-        arguments:
-        - name: BUILDER
-          value: jenkins-go
+        name: jenkins-go
     name: release
 
   jenkins-x-charts/vault-operator:
@@ -128,6 +98,177 @@ postsubmits:
         arguments:
         - name: WORKSPACE
           value: /workspace/vault-operator
+    name: release
+  jenkins-x/cloud-environments:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release
+  jenkins-x/exposecontroller:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release
+  jenkins-x/exposecontroller-service:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release
+  jenkins-x/homebrew-jx:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release
+  jenkins-x/jenkins-x-image:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    name: release
+  jenkins-x/jenkins-x-platform:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    name: release
+  jenkins-x/jx-docs:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release
+  jenkins-x/jx-java-client:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-maven
+    name: release
+  jenkins-x/jx-release-version:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release
+  jenkins-x/jx-tutorial:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release
+  jenkins-x/knative-charts:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    name: release
+  jenkins-x/metrics:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    name: release
+  jenkins-x/nexus:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    name: release
+  jenkins-x/pipeline-events-addon:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    name: release
+  jenkins-x/prow:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    name: release
+  jenkins-x/sso-operator:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release
+  jenkins-x/terraform-provider-jx:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release
+  jenkins-x/updatebot:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-maven
+    name: release
+  jenkins-x/vscode-jx-tools:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-javascript
     name: release
 
 presubmits:
@@ -209,10 +350,7 @@ presubmits:
     build_spec:
       serviceAccountName: jenkins
       template:
-        name: jenkins
-        arguments:
-        - name: BUILDER
-          value: jenkins-go
+        name: jenkins-go
     context: serverless-jenkins
     name: serverless-jenkins
     rerun_command: /test this
@@ -229,6 +367,217 @@ presubmits:
           value: /workspace/vault-operator
     context: knative-build
     name: knative-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  jenkins-x/cloud-environments:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/exposecontroller:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/exposecontroller-service:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/homebrew-jx:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/jenkins-x-image:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/jenkins-x-platform:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/jx-docs:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/jx-java-client:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-maven
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/jx-release-version:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/jx-tutorial:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/knative-charts:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/metrics:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/nexus:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/pipeline-events-addon:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/prow:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/sso-operator:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/terraform-provider-jx:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/updatebot:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-maven
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  jenkins-x/vscode-jx-tools:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-javascript
+    context: serverless-jenkins
+    name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
@@ -258,4 +607,23 @@ tide:
     - jenkins-x-charts/vault-operator
     - rawlingsj/testchart
     - jenkins-x/ext-java-code-quality
+    - jenkins-x/cloud-environments
+    - jenkins-x/exposecontroller
+    - jenkins-x/exposecontroller-service
+    - jenkins-x/homebrew-jx
+    - jenkins-x/jenkins-x-image
+    - jenkins-x/jenkins-x-platform
+    - jenkins-x/jx-docs
+    - jenkins-x/jx-java-client
+    - jenkins-x/jx-release-version
+    - jenkins-x/jx-tutorial
+    - jenkins-x/knative-charts
+    - jenkins-x/metrics
+    - jenkins-x/nexus
+    - jenkins-x/pipeline-events-addon
+    - jenkins-x/prow
+    - jenkins-x/sso-operator
+    - jenkins-x/terraform-provider-jx
+    - jenkins-x/updatebot
+    - jenkins-x/vscode-jx-tools
   target_url: https://deck.jx.cd.jenkins-x.io
