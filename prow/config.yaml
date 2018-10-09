@@ -1,9 +1,37 @@
 branch-protection:
+  protect: true
   orgs:
     jenkins-x:
-      protect: true
+      repos:
+        jx:
+        jenkins-x-builders:
+        jenkins-x-serverless:
+        dex:
+        ext-jacoco:
+        ext-java-code-quality:
+        testchart:
+        cloud-environments:
+        exposecontroller:
+        exposecontroller-service:
+        homebrew-jx:
+        jenkins-x-image:
+        jenkins-x-platform:
+        jx-docs:
+        jx-java-client:
+        jx-release-version:
+        jx-tutorial:
+        knative-charts:
+        metrics:
+        nexus:
+        pipeline-events-addon:
+        prow:
+        sso-operator:
+        terraform-provider-jx:
+        updatebot:
+        vscode-jx-tools:
     jenkins-x-charts:
-      protect: true
+      repos:
+        vault-operator:
 
 owners_dir_blacklist:
   default: null
