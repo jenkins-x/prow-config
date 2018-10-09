@@ -4,34 +4,88 @@ branch-protection:
     jenkins-x:
       repos:
         jx:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         jenkins-x-builders:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         jenkins-x-serverless:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         dex:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         ext-jacoco:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         ext-java-code-quality:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         testchart:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         cloud-environments:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         exposecontroller:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         exposecontroller-service:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         homebrew-jx:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         jenkins-x-image:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         jenkins-x-platform:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         jx-docs:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         jx-java-client:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         jx-release-version:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         jx-tutorial:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         knative-charts:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         metrics:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         nexus:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         pipeline-events-addon:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         prow:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         sso-operator:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         terraform-provider-jx:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         updatebot:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         vscode-jx-tools:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
     jenkins-x-charts:
       repos:
         vault-operator:
+          required_status_checks:
+            contexts: ["knative-build"]
 
 owners_dir_blacklist:
   default: null
