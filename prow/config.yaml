@@ -13,8 +13,7 @@ branch-protection:
           restrictions:
             users: []
         ext-jacoco:
-          restrictions:
-            users: []     
+        ext-java-code-quality:
     jenkins-x-charts:
       protect: true
       required_status_checks:
@@ -221,6 +220,19 @@ postsubmits:
     name: release
 
   jenkins-x/ext-jacoco:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins
+        arguments:
+        - name: BUILDER
+          value: jenkins-go
+    name: release
+
+  jenkins-x/ext-java-code-quality:
   - agent: knative-build
     branches:
     - master
@@ -469,6 +481,21 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  jenkins-x/ext-java-code-quality:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins
+        arguments:
+        - name: BUILDER
+          value: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   rawlingsj/testchart:
   - agent: knative-build
     always_run: false
@@ -523,4 +550,5 @@ tide:
     - jenkins-x/jenkins-x-serverless
     - jenkins-x-charts/vault-operator
     - rawlingsj/testchart
+    - jenkins-x/ext-java-code-quality
   target_url: https://deck.jx.cd.jenkins-x.io
