@@ -410,7 +410,6 @@ plugins:
   - size
   - trigger
   - wip
-  - cat
   cloudbees/cdx-frontend:
   - approve
   - heart
@@ -423,7 +422,6 @@ plugins:
   - size
   - trigger
   - wip
-  - cat
 requiresig: {}
 sigmention: {}
 slack: {}
