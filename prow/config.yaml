@@ -497,8 +497,8 @@ presubmits:
         arguments:
         - name: WORKSPACE
           value: /workspace/knative-build
-    context: serverless-jenkins
-    name: serverless-jenkins
+    context: knative-build
+    name: knative-build
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
@@ -511,8 +511,8 @@ presubmits:
         arguments:
         - name: WORKSPACE
           value: /workspace/prow
-    context: serverless-jenkins
-    name: serverless-jenkins
+    context: knative-build
+    name: knative-build
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
