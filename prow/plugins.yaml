@@ -1,6 +1,8 @@
 triggers:
 - repos:
   - jenkins-x/prow-config
+  - jenkins-x/jx
+  - rawlingsj/testchart
 approve:
 - lgtm_acts_as_approve: true
   repos:
