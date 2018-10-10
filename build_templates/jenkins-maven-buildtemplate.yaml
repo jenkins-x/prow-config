@@ -22,7 +22,7 @@ spec:
         configMapKeyRef:
           key: docker.registry
           name: jenkins-x-docker-registry
-    image: jenkinsxio/jenkins-maven:dev_22
+    image: jenkinsxio/jenkins-maven:0.1.8
     name: "jenkins"
     resources:
       limits:
@@ -38,8 +38,6 @@ spec:
       name: docker-sock-volume
     - mountPath: /root/.m2/
       name: jenkins-maven-settings
-    - mountPath: /home/jenkins/.gnupg
-      name: jenkins-release-gpg
   volumes:
   - name: jenkins-docker-cfg
     secret:
@@ -50,6 +48,3 @@ spec:
   - name: jenkins-maven-settings
     secret:
       secretName: jenkins-maven-settings
-  - name: jenkins-release-gpg
-    secret:
-      secretName: jenkins-release-gpg
