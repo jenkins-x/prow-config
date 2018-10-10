@@ -375,7 +375,7 @@ postsubmits:
     branches:
     - master
     build_spec:
-      serviceAccountName: jenkins
+      serviceAccountName: knative-build-bot
       template:
         name: jenkins-go
     name: release
@@ -384,7 +384,7 @@ postsubmits:
     branches:
     - master
     build_spec:
-      serviceAccountName: jenkins
+      serviceAccountName: knative-build-bot
       template:
         name: jenkins-javascript
     name: release
@@ -709,7 +709,7 @@ presubmits:
   - agent: knative-build
     always_run: false
     build_spec:
-      serviceAccountName: jenkins
+      serviceAccountName: knative-build-bot
       template:
         name: jenkins-go
     context: serverless-jenkins
@@ -721,7 +721,7 @@ presubmits:
   - agent: knative-build
     always_run: false
     build_spec:
-      serviceAccountName: jenkins
+      serviceAccountName: knative-build-bot
       template:
         name: jenkins-javascript
     context: serverless-jenkins
