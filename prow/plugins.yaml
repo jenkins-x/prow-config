@@ -140,6 +140,19 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x/haha:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   jenkins-x/ext-java-code-quality:
   - approve
   - heart
