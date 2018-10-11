@@ -75,6 +75,12 @@ branch-protection:
         vscode-jx-tools:
           required_status_checks:
             contexts: ["serverless-jenkins"]
+        jenkins-x-extensions:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
+        ext-spotbugs:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
     jenkins-x-charts:
       repos:
         vault-operator:
@@ -108,6 +114,26 @@ sinker:
 
 postsubmits:
   jenkins-x/jx:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release
+
+  jenkins-x/jenkins-x-extensions:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    name: release
+
+  ext-spotbugs:
   - agent: knative-build
     branches:
     - master
@@ -411,8 +437,8 @@ presubmits:
         name: jenkins-go
     context: serverless-jenkins
     name: serverless-jenkins
-    rerun_command: /test bdd
-    trigger: (?m)^/test( all| bdd),?(\s+|$)
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
 
   jenkins-x/jenkins-x-serverless:
   - agent: knative-build
@@ -423,8 +449,32 @@ presubmits:
         name: jenkins-cwp
     context: serverless-jenkins
     name: serverless-jenkins
-    rerun_command: /test bdd
-    trigger: (?m)^/test( all| bdd),?(\s+|$)
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  jenkins-x/jenkins-x-extensions:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-base
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  jenkins-x/ext-spotbugs:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
 
   jenkins-x/dex:
   - agent: knative-build
@@ -763,6 +813,8 @@ tide:
     - jenkins-x/homebrew-jx
     - jenkins-x/jenkins-x-image
     - jenkins-x/jenkins-x-platform
+    - jenkins-x/ext-spotbugs
+    - jenkins-x/jenkins-x-extensions
     - jenkins-x/jx-docs
     - jenkins-x/jx-java-client
     - jenkins-x/jx-release-version

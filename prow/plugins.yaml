@@ -400,6 +400,32 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x/jenkins-x-extensions:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  jenkins-x/ext-spotbugs:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   cloudbees/cdx-backend:
   - approve
   - heart
@@ -424,6 +450,7 @@ plugins:
   - size
   - trigger
   - wip
+  - yuks
 requiresig: {}
 sigmention: {}
 slack: {}
