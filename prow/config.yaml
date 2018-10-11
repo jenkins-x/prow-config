@@ -81,6 +81,9 @@ branch-protection:
         ext-spotbugs:
           required_status_checks:
             contexts: ["serverless-jenkins"]
+        haha:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
     jenkins-x-charts:
       repos:
         vault-operator:
@@ -182,6 +185,16 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
+
+  jenkins-x/haha:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release  
 
   jenkins-x/ext-java-code-quality:
   - agent: knative-build
@@ -499,6 +512,18 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
+  
+  jenkins-x/haha:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)  
 
   jenkins-x/ext-java-code-quality:
   - agent: knative-build
@@ -800,6 +825,7 @@ tide:
     - jenkins-x/jx
     - jenkins-x/dex
     - jenkins-x/ext-jacoco
+    - jenkins-x/haha
     - jenkins-x/jenkins-x-builders
     - jenkins-x/jenkins-x-serverless
     - jenkins-x-charts/vault-operator
