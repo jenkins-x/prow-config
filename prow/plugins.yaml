@@ -464,6 +464,18 @@ plugins:
   - trigger
   - wip
   - yuks
+  jenkins-x-charts/jx-build-templates:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
 requiresig: {}
 sigmention: {}
 slack: {}
