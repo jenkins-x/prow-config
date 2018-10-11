@@ -136,7 +136,7 @@ postsubmits:
         name: jenkins-base
     name: release
 
-  ext-spotbugs:
+  jenkins-x/ext-spotbugs:
   - agent: knative-build
     branches:
     - master
