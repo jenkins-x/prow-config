@@ -95,6 +95,10 @@ branch-protection:
         prow:
           required_status_checks:
             contexts: ["knative-build"]
+        jx-build-templates:
+          required_status_checks:
+            contexts: ["knative-build"]
+
     cloudbees:
       repos:
         cdx-backend:
@@ -227,6 +231,19 @@ postsubmits:
         arguments:
         - name: WORKSPACE
           value: /workspace/vault-operator
+    name: release
+
+  jenkins-x-charts/jx-build-templates:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: knative-chart-release
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/jx-build-templates
     name: release
 
   jenkins-x-charts/knative:
@@ -563,6 +580,20 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  jenkins-x-charts/jx-build-templates:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      template:
+        name: knative-chart-ci
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/jx-build-templates
+    context: knative-build
+    name: knative-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x-charts/knative:
   - agent: knative-build
     always_run: false
@@ -829,6 +860,7 @@ tide:
     - jenkins-x/jenkins-x-builders
     - jenkins-x/jenkins-x-serverless
     - jenkins-x-charts/vault-operator
+    - jenkins-x-charts/jx-build-templates
     - jenkins-x-charts/knative
     - jenkins-x-charts/prow
     - rawlingsj/testchart
