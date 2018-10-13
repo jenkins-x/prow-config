@@ -271,6 +271,16 @@ postsubmits:
         - name: WORKSPACE
           value: /workspace/prow
     name: release
+    run_after_success:
+    - name: deploy
+      agent: knative-build
+      build_spec:
+        serviceAccountName: jenkins
+        template:
+          name: knative-deploy
+          arguments:
+          - name: ADDON_NAME
+            value: jx-prow
 
   jenkins-x/cloud-environments:
   - agent: knative-build
