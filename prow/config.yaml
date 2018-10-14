@@ -219,6 +219,16 @@ postsubmits:
       template:
         name: jenkins-test
     name: release
+    run_after_success:
+    - name: deploy
+      agent: knative-build
+      build_spec:
+        serviceAccountName: jenkins
+        template:
+          name: knative-deploy
+          arguments:
+          - name: ADDON_NAME
+            value: jx-prow
 
   jenkins-x-charts/vault-operator:
   - agent: knative-build
