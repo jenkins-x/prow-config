@@ -439,7 +439,7 @@ plugins:
   - trigger
   - wip
   - cat
-  cloudbees/cdx-backend:
+  cloudbees/core-backend:
   - approve
   - heart
   - assign
@@ -451,7 +451,7 @@ plugins:
   - size
   - trigger
   - wip
-  cloudbees/cdx-frontend:
+  cloudbees/core-frontend:
   - approve
   - heart
   - assign

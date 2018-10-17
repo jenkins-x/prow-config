@@ -101,10 +101,10 @@ branch-protection:
 
     cloudbees:
       repos:
-        cdx-backend:
+        core-backend:
           required_status_checks:
             contexts: ["serverless-jenkins"]
-        cdx-frontend:
+        core-frontend:
           required_status_checks:
             contexts: ["serverless-jenkins"]
 
@@ -435,7 +435,7 @@ postsubmits:
         name: jenkins-javascript
     name: release
 
-  cloudbees/cdx-backend:
+  cloudbees/core-backend:
   - agent: knative-build
     branches:
     - master
@@ -444,7 +444,7 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-  cloudbees/cdx-frontend:
+  cloudbees/core-frontend:
   - agent: knative-build
     branches:
     - master
@@ -820,7 +820,7 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  cloudbees/cdx-backend:
+  cloudbees/core-backend:
   - agent: knative-build
     always_run: false
     build_spec:
@@ -832,7 +832,7 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  cloudbees/cdx-frontend:
+  cloudbees/core-frontend:
   - agent: knative-build
     always_run: false
     build_spec:
@@ -893,7 +893,7 @@ tide:
     - jenkins-x/terraform-provider-jx
     - jenkins-x/updatebot
     - jenkins-x/vscode-jx-tools
-    - cloudbees/cdx-backend
-    - cloudbees/cdx-frontend
+    - cloudbees/core-backend
+    - cloudbees/core-frontend
     
   target_url: https://deck.jx.cd.jenkins-x.io
