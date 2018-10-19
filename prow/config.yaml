@@ -119,14 +119,14 @@ sinker:
   max_prowjob_age: 24h
   max_pod_age: 24h
 
-# periodics:
-# - name: upgrade
-#   interval: 1m
-#   agent: knative-build
-#   build_spec:
-#     serviceAccountName: jenkins
-#     template:
-#       name: knative-deploy
+periodics:
+- name: upgrade
+  interval: 5m
+  agent: knative-build
+  build_spec:
+    serviceAccountName: jenkins
+    template:
+      name: knative-deploy
 
 postsubmits:
   jenkins-x/jx:
