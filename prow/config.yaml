@@ -457,7 +457,7 @@ postsubmits:
 presubmits:
   jenkins-x/jx:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -469,7 +469,7 @@ presubmits:
 
   jenkins-x/jenkins-x-builders:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -481,7 +481,7 @@ presubmits:
 
   jenkins-x/jenkins-x-serverless:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -493,7 +493,7 @@ presubmits:
 
   jenkins-x/jenkins-x-extensions:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -505,7 +505,7 @@ presubmits:
 
   jenkins-x/ext-spotbugs:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -517,7 +517,7 @@ presubmits:
 
   jenkins-x/dex:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -529,7 +529,7 @@ presubmits:
 
   jenkins-x/ext-jacoco:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -541,7 +541,7 @@ presubmits:
   
   jenkins-x/haha:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -553,7 +553,7 @@ presubmits:
 
   jenkins-x/ext-java-code-quality:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -565,7 +565,7 @@ presubmits:
 
   rawlingsj/testchart:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -577,8 +577,7 @@ presubmits:
 
   jenkins-x-charts/vault-operator:
   - agent: knative-build
-    always_run: true
-
+    always_run: false
     build_spec:
       template:
         name: knative-chart-ci
@@ -592,7 +591,7 @@ presubmits:
 
   jenkins-x-charts/jx-build-templates:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       template:
         name: knative-chart-ci
@@ -606,7 +605,7 @@ presubmits:
 
   jenkins-x-charts/knative:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       template:
         name: knative-chart-ci
@@ -620,7 +619,7 @@ presubmits:
 
   jenkins-x-charts/prow:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       template:
         name: knative-chart-ci
@@ -634,7 +633,7 @@ presubmits:
 
   jenkins-x/cloud-environments:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -645,7 +644,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/exposecontroller:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -656,7 +655,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/exposecontroller-service:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -667,7 +666,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/homebrew-jx:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -678,7 +677,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/jenkins-x-image:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -689,7 +688,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/jenkins-x-platform:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -700,7 +699,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/jx-docs:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -711,7 +710,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/jx-java-client:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -722,7 +721,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/jx-release-version:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -733,7 +732,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/jx-tutorial:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -744,7 +743,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/metrics:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -755,7 +754,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/nexus:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -766,7 +765,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/pipeline-events-addon:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -777,7 +776,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/sso-operator:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -788,7 +787,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/terraform-provider-jx:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -799,7 +798,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/updatebot:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -811,7 +810,7 @@ presubmits:
 
   jenkins-x/vscode-jx-tools:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -823,7 +822,7 @@ presubmits:
 
   cloudbees/core-backend:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: knative-build-bot
       template:
@@ -835,7 +834,7 @@ presubmits:
 
   cloudbees/core-frontend:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: knative-build-bot
       template:
@@ -896,14 +895,5 @@ tide:
     - jenkins-x/vscode-jx-tools
     - cloudbees/core-backend
     - cloudbees/core-frontend
-  - labels:
-    - updatebot
-    missingLabels:
-    - do-not-merge
-    - do-not-merge/hold
-    - do-not-merge/work-in-progress
-    - needs-ok-to-test
-    - needs-rebase
-    repos:
-    - jenkins-x
+    
   target_url: https://deck.jx.cd.jenkins-x.io
