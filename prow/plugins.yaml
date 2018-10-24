@@ -1,8 +1,9 @@
 triggers:
 - repos:
-  - jenkins-x/prow-config
-  - jenkins-x/jx
-  - rawlingsj/testchart
+  - jenkins-x
+  - rawlingsj
+  trusted_org: kubernetes
+  only_org_members: true
 approve:
 - lgtm_acts_as_approve: true
   repos:
