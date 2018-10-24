@@ -904,6 +904,6 @@ tide:
     - do-not-merge/work-in-progress
     - needs-ok-to-test
     - needs-rebase
-    repos:
+    orgs:
     - jenkins-x
   target_url: https://deck.jx.cd.jenkins-x.io
