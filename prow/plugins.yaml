@@ -2,7 +2,7 @@ triggers:
 - repos:
   - jenkins-x
   - rawlingsj
-  trusted_org: kubernetes
+  trusted_org: jenkins-x
   only_org_members: true
 approve:
 - lgtm_acts_as_approve: true
