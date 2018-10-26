@@ -827,4 +827,5 @@ tide:
     - needs-rebase
     orgs:
     - jenkins-x
+    - jenkins-x-charts
   target_url: https://deck.jx.cd.jenkins-x.io
