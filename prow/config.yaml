@@ -829,4 +829,4 @@ tide:
     - jenkins-x
     - jenkins-x-charts
     - cloudbees
-  target_url: https://deck.jx.cd.jenkins-x.io
+  target_url: https://cdx.jx.cd.jenkins-x.io
