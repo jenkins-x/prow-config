@@ -555,7 +555,7 @@ presubmits:
 
   jenkins-x/cloud-environments:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
@@ -767,7 +767,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
 
 tide:
-  sync_period: 2m
+  sync_period: 1m
   status_update_period: 1m
   context_options:
     from-branch-protection: true
