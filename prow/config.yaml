@@ -555,7 +555,7 @@ presubmits:
 
   jenkins-x/cloud-environments:
   - agent: knative-build
-    always_run: true
+    always_run: false
     build_spec:
       serviceAccountName: jenkins
       template:
