@@ -4,6 +4,11 @@ triggers:
   - rawlingsj
   trusted_org: jenkins-x
   only_org_members: true
+- repos:
+  - core-frontend
+  - core-backend
+  trusted_org: cloudbees
+  only_org_members: true
 approve:
 - lgtm_acts_as_approve: true
   repos:
