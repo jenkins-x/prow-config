@@ -31,6 +31,9 @@ branch-protection:
         haha:
           required_status_checks:
             contexts: ["serverless-jenkins"]
+        cloudbees-apps:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
 
 owners_dir_blacklist:
   default: null
@@ -379,6 +382,15 @@ postsubmits:
         name: jenkins-go
     name: release  
 
+  cloudbees/cloudbees-apps:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    name: release  
 presubmits:
   jenkins-x/jx:
   - agent: knative-build
@@ -770,6 +782,18 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)  
 
+  cloudbees/cloudbees-apps:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)  
+
 tide:
   sync_period: 1m
   status_update_period: 1m
@@ -821,6 +845,7 @@ tide:
     - cloudbees/core-backend
     - cloudbees/core-frontend
     - cloudbees/haha
+    - cloudbees/cloudbees-apps
   - labels:
     - updatebot
     missingLabels:
