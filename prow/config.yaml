@@ -828,5 +828,7 @@ tide:
     orgs:
     - jenkins-x
     - jenkins-x-charts
-    - cloudbees
+    repos:
+    - cloudbees/core-backend
+    - cloudbees/core-frontend
   target_url: https://cdx.jx.cd.jenkins-x.io/teams/jx/pipelines
