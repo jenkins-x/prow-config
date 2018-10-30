@@ -7,6 +7,7 @@ triggers:
 - repos:
   - core-frontend
   - core-backend
+  - haha
   trusted_org: cloudbees
   only_org_members: true
 approve:
@@ -146,7 +147,7 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x/haha:
+  cloudbees/haha:
   - approve
   - heart
   - assign
