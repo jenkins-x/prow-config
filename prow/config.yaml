@@ -28,6 +28,9 @@ branch-protection:
         core-frontend:
           required_status_checks:
             contexts: ["serverless-jenkins"]
+        haha:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
 
 owners_dir_blacklist:
   default: null
@@ -119,16 +122,6 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-
-  jenkins-x/haha:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: jenkins
-      template:
-        name: jenkins-go
-    name: release  
 
   jenkins-x/ext-java-code-quality:
   - agent: knative-build
@@ -365,6 +358,7 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
+
   cloudbees/core-frontend:
   - agent: knative-build
     branches:
@@ -374,6 +368,16 @@ postsubmits:
       template:
         name: jenkins-javascript
     name: release
+
+  cloudbees/haha:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: jenkins
+      template:
+        name: jenkins-go
+    name: release  
 
 presubmits:
   jenkins-x/jx:
@@ -459,18 +463,6 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  
-  jenkins-x/haha:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: jenkins
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)  
 
   jenkins-x/ext-java-code-quality:
   - agent: knative-build
@@ -765,6 +757,18 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
+  
+  cloudbees/haha:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)  
 
 tide:
   sync_period: 1m
@@ -787,7 +791,6 @@ tide:
     - jenkins-x/jx
     - jenkins-x/dex
     - jenkins-x/ext-jacoco
-    - jenkins-x/haha
     - jenkins-x/jenkins-x-builders
     - jenkins-x/jenkins-x-serverless
     - jenkins-x-charts/vault-operator
@@ -817,6 +820,7 @@ tide:
     - jenkins-x/vscode-jx-tools
     - cloudbees/core-backend
     - cloudbees/core-frontend
+    - cloudbees/haha
   - labels:
     - updatebot
     missingLabels:
@@ -831,4 +835,5 @@ tide:
     repos:
     - cloudbees/core-backend
     - cloudbees/core-frontend
+    - cloudbees/haha
   target_url: https://cdx.jx.cd.jenkins-x.io/teams/jx/pipelines
