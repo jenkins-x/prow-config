@@ -8,6 +8,7 @@ triggers:
   - core-frontend
   - core-backend
   - haha
+  - cloudbees-apps
   trusted_org: cloudbees
   only_org_members: true
 approve:
@@ -148,6 +149,19 @@ plugins:
   - wip
   - cat
   cloudbees/haha:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  cloudbees/cloudbees-apps:
   - approve
   - heart
   - assign
