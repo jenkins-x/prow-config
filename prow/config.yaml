@@ -48,7 +48,7 @@ sinker:
 
 periodics:
 - name: upgrade
-  interval: 5m
+  interval: 15m
   agent: knative-build
   build_spec:
     serviceAccountName: jenkins
