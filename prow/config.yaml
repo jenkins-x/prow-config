@@ -53,7 +53,7 @@ periodics:
   build_spec:
     serviceAccountName: jenkins
     template:
-      name: knative-deploy
+      name: upgrade-addons
 
 postsubmits:
   jenkins-x/jx:
