@@ -861,4 +861,5 @@ tide:
     - cloudbees/core-backend
     - cloudbees/core-frontend
     - cloudbees/haha
+    - cloudbees/cloudbees-apps
   target_url: https://core.jx.cd.jenkins-x.io/teams/jx/pipelines
