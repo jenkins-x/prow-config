@@ -47,13 +47,13 @@ sinker:
   max_pod_age: 4h
 
 periodics:
-- name: upgrade
-  interval: 15m
-  agent: knative-build
-  build_spec:
-    serviceAccountName: jenkins
-    template:
-      name: upgrade-addons
+# - name: upgrade
+#   interval: 15m
+#   agent: knative-build
+#   build_spec:
+#     serviceAccountName: jenkins
+#     template:
+#       name: upgrade-addons
 
 postsubmits:
   jenkins-x/jx:
