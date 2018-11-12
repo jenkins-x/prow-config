@@ -6,19 +6,8 @@ branch-protection:
         contexts: ["serverless-jenkins"]
 
     jenkins-x-charts:
-      repos:
-        vault-operator:
-          required_status_checks:
-            contexts: ["knative-build"]
-        knative:
-          required_status_checks:
-            contexts: ["knative-build"]
-        prow:
-          required_status_checks:
-            contexts: ["knative-build"]
-        jx-build-templates:
-          required_status_checks:
-            contexts: ["knative-build"]
+        required_status_checks:
+          contexts: ["knative-build"]
 
     cloudbees:
       repos:
@@ -134,16 +123,6 @@ postsubmits:
       serviceAccountName: jenkins
       template:
         name: jenkins-go
-    name: release
-
-  rawlingsj/testchart:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: jenkins
-      template:
-        name: jenkins-test
     name: release
 
   jenkins-x-charts/vault-operator:
@@ -488,18 +467,6 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  rawlingsj/testchart:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: jenkins
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-
   jenkins-x-charts/vault-operator:
   - agent: knative-build
     always_run: true
@@ -821,7 +788,6 @@ tide:
     - jenkins-x-charts/jx-build-templates
     - jenkins-x-charts/knative
     - jenkins-x-charts/prow
-    - rawlingsj/testchart
     - jenkins-x/ext-java-code-quality
     - jenkins-x/cloud-environments
     - jenkins-x/exposecontroller
