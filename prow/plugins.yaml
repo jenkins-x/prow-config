@@ -5,6 +5,15 @@ triggers:
   trusted_org: jenkins-x
   only_org_members: true
 - repos:
+  - gerrit
+  - knative
+  - prow
+  - jx-build-templates
+  - vault-operator
+  - openshift-namespace-rbac-chart
+  trusted_org: jenkins-x-charts
+  only_org_members: true
+- repos:
   - core-frontend
   - core-backend
   - haha
@@ -384,6 +393,19 @@ plugins:
   - wip
   - cat
   jenkins-x-charts/prow:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  jenkins-x-charts/gerrit:
   - approve
   - heart
   - assign
