@@ -396,6 +396,19 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x-charts/gerrit:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   jenkins-x/sso-operator:
   - approve
   - heart

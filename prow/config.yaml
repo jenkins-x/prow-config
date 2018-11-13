@@ -179,6 +179,19 @@ postsubmits:
         - name: WORKSPACE
           value: /workspace/prow
     name: release
+  
+  jenkins-x-charts/gerrit:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: knative-chart-release
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/gerrit
+    name: release
 
   jenkins-x/cloud-environments:
   - agent: knative-build
@@ -537,6 +550,20 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  jenkins-x-charts/gerrit:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      template:
+        name: knative-chart-ci
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/gerrit
+    context: knative-build
+    name: knative-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x/cloud-environments:
   - agent: knative-build
     always_run: false
@@ -813,6 +840,7 @@ tide:
     - jenkins-x-charts/jx-build-templates
     - jenkins-x-charts/knative
     - jenkins-x-charts/prow
+    - jenkins-x-charts/gerrit
     - jenkins-x/ext-java-code-quality
     - jenkins-x/cloud-environments
     - jenkins-x/exposecontroller
