@@ -164,7 +164,7 @@ postsubmits:
         name: knative-chart-release
         arguments:
         - name: WORKSPACE
-          value: /workspace/openshift-namespace-rbac-chart
+          value: /workspace/openshift-namespace-rbac
     name: release
 
   jenkins-x-charts/knative:
@@ -530,7 +530,7 @@ presubmits:
         name: knative-chart-ci
         arguments:
         - name: WORKSPACE
-          value: /workspace/openshift-namespace-rbac-chart
+          value: /workspace/openshift-namespace-rbac
     context: knative-build
     name: knative-build
     rerun_command: /test this
