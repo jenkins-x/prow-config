@@ -119,6 +119,19 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x-charts/openshift-namespace-rbac-chart:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   jenkins-x/dex:
   - approve
   - heart

@@ -154,6 +154,19 @@ postsubmits:
           value: /workspace/jx-build-templates
     name: release
 
+  jenkins-x-charts/openshift-namespace-rbac-chart:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: knative-chart-release
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/openshift-namespace-rbac-chart
+    name: release
+
   jenkins-x-charts/knative:
   - agent: knative-build
     branches:
@@ -508,6 +521,21 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  jenkins-x-charts/openshift-namespace-rbac-chart:
+  - agent: knative-build
+    always_run: true
+
+    build_spec:
+      template:
+        name: knative-chart-ci
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/openshift-namespace-rbac-chart
+    context: knative-build
+    name: knative-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x-charts/jx-build-templates:
   - agent: knative-build
     always_run: true
@@ -838,6 +866,7 @@ tide:
     - jenkins-x/jenkins-x-serverless
     - jenkins-x-charts/vault-operator
     - jenkins-x-charts/jx-build-templates
+    - jenkins-x-charts/openshift-namespace-rbac-chart
     - jenkins-x-charts/knative
     - jenkins-x-charts/prow
     - jenkins-x-charts/gerrit
