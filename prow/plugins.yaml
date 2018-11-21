@@ -24,11 +24,14 @@ triggers:
 approve:
 - lgtm_acts_as_approve: true
   repos:
-  - jenkins-x-bot/environment-jenkinsx-dev-staging
-  - jenkins-x-bot/environment-jenkinsx-dev-production
+  - jenkins-x/jx
   review_acts_as_approve: true
 blunderbuss: {}
 cat: {}
+lgtm:
+- repos:
+  - jenkins-x/jx
+  review_acts_as_lgtm: true
 config_updater:
   maps:
     prow/config.yaml:
