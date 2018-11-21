@@ -846,7 +846,7 @@ tide:
   status_update_period: 1m
   context_options:
     from-branch-protection: true
-  skip-unknown-contexts: false
+    skip-unknown-contexts: false
   queries:
   - labels:
     - updatebot
