@@ -155,7 +155,7 @@ postsubmits:
         name: knative-chart-release
         arguments:
         - name: WORKSPACE
-          value: /workspace/charts/jx-app-grafana
+          value: /workspace/jx-app-grafana
     name: release
 
   jenkins-x-charts/jx-build-templates:
@@ -547,7 +547,7 @@ presubmits:
         name: knative-chart-ci
         arguments:
         - name: WORKSPACE
-          value: /workspace/charts/jx-app-grafana
+          value: /workspace/jx-app-grafana
     context: knative-build
     name: knative-build
     rerun_command: /test this
