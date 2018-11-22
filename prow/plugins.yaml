@@ -135,6 +135,19 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x-apps/jx-app-istio:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   jenkins-x-charts/vault-operator:
   - approve
   - heart

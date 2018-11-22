@@ -171,6 +171,19 @@ postsubmits:
           value: /workspace/jx-app-grafana
     name: release
 
+  jenkins-x-apps/jx-app-istio:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: knative-chart-release
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/jx-app-istio
+    name: release
+
   jenkins-x-charts/jx-build-templates:
   - agent: knative-build
     branches:
@@ -581,6 +594,21 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  jenkins-x-apps/jx-app-istio:
+  - agent: knative-build
+    always_run: true
+
+    build_spec:
+      template:
+        name: knative-chart-ci
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/jx-app-istio
+    context: knative-build
+    name: knative-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x-charts/openshift-namespace-rbac-chart:
   - agent: knative-build
     always_run: true
@@ -943,6 +971,7 @@ tide:
     - jenkins-x/jenkins-x-serverless
     - jenkins-x-apps/jx-app-gitea
     - jenkins-x-apps/jx-app-grafana
+    - jenkins-x-apps/jx-app-istio
     - jenkins-x-charts/vault-operator
     - jenkins-x-charts/jx-build-templates
     - jenkins-x-charts/openshift-namespace-rbac-chart
