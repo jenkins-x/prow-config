@@ -145,6 +145,19 @@ postsubmits:
           value: /workspace/vault-operator
     name: release
 
+  jenkins-x-apps/jx-app-ambassador:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: knative-chart-release
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/jx-app-ambassador
+    name: release
+
   jenkins-x-apps/jx-app-grafana:
   - agent: knative-build
     branches:
@@ -537,7 +550,22 @@ presubmits:
     name: knative-build
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  
+
+  jenkins-x-apps/jx-app-ambassador:
+  - agent: knative-build
+    always_run: true
+
+    build_spec:
+      template:
+        name: knative-chart-ci
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/jx-app-ambassador
+    context: knative-build
+    name: knative-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x-apps/jx-app-grafana:
   - agent: knative-build
     always_run: true
@@ -913,6 +941,7 @@ tide:
     - jenkins-x/ext-jacoco
     - jenkins-x/jenkins-x-builders
     - jenkins-x/jenkins-x-serverless
+    - jenkins-x-apps/jx-app-ambassador
     - jenkins-x-apps/jx-app-grafana
     - jenkins-x-charts/vault-operator
     - jenkins-x-charts/jx-build-templates
