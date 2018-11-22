@@ -122,6 +122,19 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x-apps/jx-app-anchore:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   jenkins-x-apps/jx-app-grafana:
   - approve
   - heart
