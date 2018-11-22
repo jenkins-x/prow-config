@@ -8,6 +8,10 @@ branch-protection:
     jenkins-x-charts:
         required_status_checks:
           contexts: ["knative-build"]
+    
+    jenkins-x-apps:
+        required_status_checks:
+          contexts: ["knative-build"]
 
     cloudbees:
       repos:
@@ -139,6 +143,19 @@ postsubmits:
         arguments:
         - name: WORKSPACE
           value: /workspace/vault-operator
+    name: release
+
+  jenkins-x-apps/jx-app-grafana:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: knative-chart-release
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/charts/jx-app-grafana
     name: release
 
   jenkins-x-charts/jx-build-templates:
@@ -520,6 +537,21 @@ presubmits:
     name: knative-build
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
+  
+  jenkins-x-apps/jx-app-grafana:
+  - agent: knative-build
+    always_run: true
+
+    build_spec:
+      template:
+        name: knative-chart-ci
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/charts/jx-app-grafana
+    context: knative-build
+    name: knative-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
 
   jenkins-x-charts/openshift-namespace-rbac-chart:
   - agent: knative-build
@@ -859,6 +891,7 @@ tide:
     orgs:
     - jenkins-x
     - jenkins-x-charts
+    - jenkins-x-apps
     repos:
     - cloudbees/core-backend
     - cloudbees/core-frontend
@@ -880,6 +913,7 @@ tide:
     - jenkins-x/ext-jacoco
     - jenkins-x/jenkins-x-builders
     - jenkins-x/jenkins-x-serverless
+    - jenkins-x-apps/jx-app-grafana
     - jenkins-x-charts/vault-operator
     - jenkins-x-charts/jx-build-templates
     - jenkins-x-charts/openshift-namespace-rbac-chart
