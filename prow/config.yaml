@@ -152,10 +152,7 @@ postsubmits:
     build_spec:
       serviceAccountName: knative-build-bot
       template:
-        name: knative-chart-release
-        arguments:
-        - name: WORKSPACE
-          value: /workspace/jx-app-cheese
+        name: jenkins-go
     name: release
 
   jenkins-x-apps/jx-app-gitea:
@@ -567,15 +564,12 @@ presubmits:
   jenkins-x-apps/jx-app-cheese:
   - agent: knative-build
     always_run: true
-
     build_spec:
+      serviceAccountName: knative-build-bot
       template:
-        name: knative-chart-ci
-        arguments:
-        - name: WORKSPACE
-          value: /workspace/jx-app-cheese
-    context: knative-build
-    name: knative-build
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
