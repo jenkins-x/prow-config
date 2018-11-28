@@ -10,8 +10,16 @@ branch-protection:
           contexts: ["knative-build"]
     
     jenkins-x-apps:
-        required_status_checks:
-          contexts: ["knative-build"]
+      repos:
+        jx-app-gitea:
+          required_status_checks:
+            contexts: ["knative-build"]
+        jx-app-grafana:
+          required_status_checks:
+            contexts: ["knative-build"]
+        jx-app-cheese:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
 
     cloudbees:
       repos:
