@@ -39,6 +39,12 @@ branch-protection:
           required_status_checks:
             contexts: ["serverless-jenkins"]
 
+    jenkinsci:
+      repos:
+        jx-resources-plugin:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
+
 owners_dir_blacklist:
   default: null
   repos: null
@@ -456,7 +462,18 @@ postsubmits:
       serviceAccountName: knative-build-bot
       template:
         name: jenkins-go
-    name: release  
+    name: release
+
+  jenkinsci/jx-resources-plugin:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-maven
+    name: release
+
 presubmits:
   jenkins-x/jx:
   - agent: knative-build
@@ -931,6 +948,18 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)  
 
+  jenkinsci/jx-resources-plugin:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-maven
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
 tide:
   sync_period: 1m
   status_update_period: 1m
@@ -1005,6 +1034,7 @@ tide:
     - cloudbees/haha
     - cloudbees/policy-engine
     - cloudbees/cloudbees-apps
+    - jenkinsci/jx-resources-plugin
   - labels:
     - approved
     - lgtm
@@ -1016,4 +1046,5 @@ tide:
     - needs-rebase
     repos:
     - jenkins-x/jx
+    - jenkinsci/jx-resources-plugin
   target_url: https://core.jx.cd.jenkins-x.io/teams/jx/pipelines
