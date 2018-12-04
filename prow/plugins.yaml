@@ -615,7 +615,7 @@ plugins:
   - size
   - trigger
   - wip
+  - cat
 requiresig: {}
 sigmention: {}
 slack: {}
-welcome: {}
