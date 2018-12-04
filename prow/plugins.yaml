@@ -95,6 +95,7 @@ plugins:
   - hold
   - lgtm
   - lifecycle
+  - label
   - size
   - trigger
   - wip
