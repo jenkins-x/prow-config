@@ -25,16 +25,27 @@ triggers:
   - cloudbees-apps
   trusted_org: cloudbees
   only_org_members: true
+- repos:
+  - jenkinsci/jx-resources-plugin
+  trusted_org: jenkinsci
+  only_org_members: true
 approve:
 - lgtm_acts_as_approve: true
   repos:
   - jenkins-x/jx
+  review_acts_as_approve: true
+- lgtm_acts_as_approve: true
+  repos:
+  - jenkinsci/jx-resources-plugin
   review_acts_as_approve: true
 blunderbuss: {}
 cat: {}
 lgtm:
 - repos:
   - jenkins-x/jx
+  review_acts_as_lgtm: true
+- repos:
+  - jenkinsci/jx-resources-plugin
   review_acts_as_lgtm: true
 config_updater:
   maps:
@@ -581,6 +592,18 @@ plugins:
   - wip
   - yuks
   jenkins-x-charts/jx-build-templates:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  jenkinsci/jx-resources-plugin:
   - approve
   - heart
   - assign
