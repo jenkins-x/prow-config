@@ -38,6 +38,10 @@ approve:
   repos:
   - jenkinsci/jx-resources-plugin
   review_acts_as_approve: true
+- lgtm_acts_as_approve: true
+  repos:
+  - cloudbees/core-backend
+  review_acts_as_approve: true
 blunderbuss: {}
 cat: {}
 lgtm:
@@ -46,6 +50,9 @@ lgtm:
   review_acts_as_lgtm: true
 - repos:
   - jenkinsci/jx-resources-plugin
+  review_acts_as_lgtm: true
+- repos:
+  - cloudbees/core-backend
   review_acts_as_lgtm: true
 config_updater:
   maps:
