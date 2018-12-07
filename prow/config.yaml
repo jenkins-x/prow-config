@@ -471,7 +471,7 @@ postsubmits:
     build_spec:
       serviceAccountName: knative-build-bot
       template:
-        name: jenkins-maven
+        name: knative-maven-release
     name: release
 
 presubmits:
