@@ -500,8 +500,8 @@ presubmits:
         name: jenkins-go
     context: serverless-jenkins
     name: serverless-jenkins
-    rerun_command: /test bdd
-    trigger: (?m)^/test( all| bdd),?(\s+|$)
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
 
   jenkins-x/jenkins-x-builders:
   - agent: knative-build
