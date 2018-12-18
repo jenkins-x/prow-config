@@ -20,6 +20,9 @@ branch-protection:
         jx-app-cheese:
           required_status_checks:
             contexts: ["serverless-jenkins"]
+        jx-app-sonarqube:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
 
     cloudbees:
       repos:
@@ -176,6 +179,16 @@ postsubmits:
     name: release
 
   jenkins-x-apps/jx-app-cheese:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    name: release
+  
+  jenkins-x-apps/jx-app-sonarqube:
   - agent: knative-build
     branches:
     - master
@@ -626,6 +639,18 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  jenkins-x-apps/jx-app-sonarqube:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x-apps/jx-app-gitea:
   - agent: knative-build
     always_run: true
@@ -1041,6 +1066,7 @@ tide:
     - jenkins-x/jenkins-x-builders
     - jenkins-x/jenkins-x-serverless
     - jenkins-x-apps/jx-app-cheese
+    - jenkins-x-apps/jx-app-sonarqube
     - jenkins-x-apps/jx-app-gitea
     - jenkins-x-apps/jx-app-grafana
     - jenkins-x-charts/vault-operator
