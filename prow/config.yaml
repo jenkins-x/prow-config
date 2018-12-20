@@ -31,7 +31,7 @@ branch-protection:
             contexts: ["serverless-jenkins"]
         core-frontend:
           required_status_checks:
-            contexts: ["serverless-jenkins", "percy/percy-web"]
+            contexts: ["serverless-jenkins"]
         haha:
           required_status_checks:
             contexts: ["serverless-jenkins"]
