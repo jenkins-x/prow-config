@@ -527,6 +527,16 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go-nodocker
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test gcb
+    trigger: (?m)^/test gcb,?(\s+|$)
 
   jenkins-x/jenkins-x-serverless:
   - agent: knative-build
