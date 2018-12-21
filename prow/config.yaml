@@ -534,7 +534,7 @@ presubmits:
       template:
         name: jenkins-go-nodocker
     context: serverless-jenkins
-    name: serverless-jenkins
+    name: serverless-jenkins-nodocker
     rerun_command: /test gcb
     trigger: (?m)^/test gcb,?(\s+|$)
 
