@@ -527,6 +527,7 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
+
   - agent: knative-build
     always_run: false
     build_spec:
