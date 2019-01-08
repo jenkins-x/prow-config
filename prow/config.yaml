@@ -36,16 +36,7 @@ branch-protection:
         core-frontend:
           required_status_checks:
             contexts: ["serverless-jenkins"]
-        haha:
-          required_status_checks:
-            contexts: ["serverless-jenkins"]
         cloudbees-apps:
-          required_status_checks:
-            contexts: ["serverless-jenkins"]
-        cb-app-slack:
-          required_status_checks:
-            contexts: ["serverless-jenkins"]
-        policy-tests:
           required_status_checks:
             contexts: ["serverless-jenkins"]
 
@@ -171,16 +162,6 @@ postsubmits:
         arguments:
         - name: WORKSPACE
           value: /workspace/vault-operator
-    name: release
-
-  cloudbees/cb-app-slack:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
     name: release
 
   jenkins-x-apps/jx-app-cheese:
@@ -466,16 +447,6 @@ postsubmits:
       serviceAccountName: knative-build-bot
       template:
         name: jenkins-javascript
-    name: release
-
-  cloudbees/haha:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
     name: release
 
   cloudbees/cloudbees-apps:
@@ -633,18 +604,6 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  cloudbees/cb-app-slack:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-
   jenkins-x-apps/jx-app-cheese:
   - agent: knative-build
     always_run: true
@@ -971,18 +930,6 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  cloudbees/policy-tests:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-
   cloudbees/core-frontend:
   - agent: knative-build
     always_run: true
@@ -995,18 +942,6 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
   
-  cloudbees/haha:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)  
-
   cloudbees/cloudbees-apps:
   - agent: knative-build
     always_run: true
@@ -1054,7 +989,6 @@ tide:
     repos:
     - cloudbees/core-backend
     - cloudbees/core-frontend
-    - cloudbees/haha
     - cloudbees/cloudbees-apps
   - labels:
     - approved
@@ -1104,10 +1038,7 @@ tide:
     - jenkins-x-images/xunit-viewer
     - cloudbees/core-backend
     - cloudbees/core-frontend
-    - cloudbees/haha
-    - cloudbees/cb-app-slack
     - cloudbees/cloudbees-apps
-    - cloudbees/policy-tests
     - jenkinsci/jx-resources-plugin
   - labels:
     - approved

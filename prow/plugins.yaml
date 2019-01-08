@@ -20,13 +20,7 @@ triggers:
 - repos:
   - core-frontend
   - core-backend
-  - haha
   - cloudbees-apps
-  - cb-app-slack
-  trusted_org: cloudbees
-  only_org_members: true
-- repos:
-  - cloudbees/policy-tests
   trusted_org: cloudbees
   only_org_members: true
 - repos:
@@ -137,19 +131,6 @@ plugins:
   - trigger
   - wip
   - cat
-  cloudbees/cb-app-slack:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat 
   jenkins-x-apps/jx-app-cheese:
   - approve
   - heart
@@ -255,19 +236,6 @@ plugins:
   - wip
   - cat
   jenkins-x/ext-jacoco:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
-  cloudbees/haha:
   - approve
   - heart
   - assign
@@ -605,19 +573,6 @@ plugins:
   - trigger
   - wip
   cloudbees/core-frontend:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - yuks
-  cloudbees/policy-tests:
   - approve
   - heart
   - assign
