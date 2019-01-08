@@ -24,6 +24,10 @@ branch-protection:
           required_status_checks:
             contexts: ["serverless-jenkins"]
 
+    jenkins-x-images:
+      required_status_checks:
+        contexts: ["serverless-jenkins"]
+
     cloudbees:
       repos:
         core-backend:
@@ -42,12 +46,6 @@ branch-protection:
           required_status_checks:
             contexts: ["serverless-jenkins"]
         policy-tests:
-          required_status_checks:
-            contexts: ["serverless-jenkins"]
-
-    jenkinsci:
-      repos:
-        jx-resources-plugin:
           required_status_checks:
             contexts: ["serverless-jenkins"]
 
@@ -1052,6 +1050,7 @@ tide:
     - jenkins-x
     - jenkins-x-charts
     - jenkins-x-apps
+    - jenkins-x-images
     repos:
     - cloudbees/core-backend
     - cloudbees/core-frontend
@@ -1102,6 +1101,7 @@ tide:
     - jenkins-x/terraform-provider-jx
     - jenkins-x/updatebot
     - jenkins-x/vscode-jx-tools
+    - jenkins-x-images/xunit-viewer
     - cloudbees/core-backend
     - cloudbees/core-frontend
     - cloudbees/haha
