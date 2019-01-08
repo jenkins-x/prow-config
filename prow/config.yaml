@@ -75,6 +75,16 @@ periodics:
 #       name: upgrade-addons
 
 postsubmits:
+  jenkins-x-images/xunit-viewer:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go-script-release
+    name: release
+
   jenkins-x/jx:
   - agent: knative-build
     branches:
@@ -504,6 +514,18 @@ postsubmits:
     name: release
 
 presubmits:
+  jenkins-x-images/xunit-viewer:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go-script-ci
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x/jx:
   - agent: knative-build
     always_run: true
