@@ -21,6 +21,7 @@ triggers:
   - core-frontend
   - core-backend
   - cloudbees-apps
+  - cb-app-slack
   trusted_org: cloudbees
   only_org_members: true
 - repos:
@@ -131,6 +132,19 @@ plugins:
   - trigger
   - wip
   - cat
+  cloudbees/cb-app-slack:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat 
   jenkins-x-apps/jx-app-cheese:
   - approve
   - heart

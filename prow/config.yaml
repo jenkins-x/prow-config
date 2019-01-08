@@ -39,6 +39,9 @@ branch-protection:
         cloudbees-apps:
           required_status_checks:
             contexts: ["serverless-jenkins"]
+        cb-app-slack:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
 
 owners_dir_blacklist:
   default: null
@@ -162,6 +165,16 @@ postsubmits:
         arguments:
         - name: WORKSPACE
           value: /workspace/vault-operator
+    name: release
+
+  cloudbees/cb-app-slack:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
     name: release
 
   jenkins-x-apps/jx-app-cheese:
@@ -604,6 +617,18 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  cloudbees/cb-app-slack:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x-apps/jx-app-cheese:
   - agent: knative-build
     always_run: true
@@ -1038,6 +1063,7 @@ tide:
     - jenkins-x-images/xunit-viewer
     - cloudbees/core-backend
     - cloudbees/core-frontend
+    - cloudbees/cb-app-slack
     - cloudbees/cloudbees-apps
     - jenkinsci/jx-resources-plugin
   - labels:
