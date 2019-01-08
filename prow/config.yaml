@@ -35,9 +35,6 @@ branch-protection:
         haha:
           required_status_checks:
             contexts: ["serverless-jenkins"]
-        policy-engine:
-          required_status_checks:
-            contexts: ["serverless-jenkins"]
         cloudbees-apps:
           required_status_checks:
             contexts: ["serverless-jenkins"]
@@ -482,16 +479,6 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-  
-  cloudbees/policy-engine:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release  
 
   cloudbees/cloudbees-apps:
   - agent: knative-build
@@ -1022,18 +1009,6 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)  
 
-  cloudbees/policy-engine:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-
   cloudbees/cloudbees-apps:
   - agent: knative-build
     always_run: true
@@ -1081,7 +1056,6 @@ tide:
     - cloudbees/core-backend
     - cloudbees/core-frontend
     - cloudbees/haha
-    - cloudbees/policy-engine
     - cloudbees/cloudbees-apps
   - labels:
     - approved
@@ -1131,7 +1105,6 @@ tide:
     - cloudbees/core-backend
     - cloudbees/core-frontend
     - cloudbees/haha
-    - cloudbees/policy-engine
     - cloudbees/cb-app-slack
     - cloudbees/cloudbees-apps
     - cloudbees/policy-tests
