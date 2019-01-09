@@ -90,6 +90,16 @@ postsubmits:
         name: jenkins-go
     name: release
 
+  jenkins-x/jx-quickstarts-bdd-test-job:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go-script-release
+    name: release
+
   jenkins-x/jenkins-x-extensions:
   - agent: knative-build
     branches:
@@ -1092,6 +1102,7 @@ tide:
     - jenkins-x/jenkins-x-extensions
     - jenkins-x/jx-docs
     - jenkins-x/jx-java-client
+    - jenkins-x/jx-quickstarts-bdd-test-job
     - jenkins-x/jx-release-version
     - jenkins-x/jx-tutorial
     - jenkins-x/metrics
