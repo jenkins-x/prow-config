@@ -579,6 +579,19 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x/jx-quickstarts-bdd-test-job:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   jenkins-x/ext-spotbugs:
   - approve
   - heart
