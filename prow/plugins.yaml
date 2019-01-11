@@ -681,6 +681,19 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x-images/oauth2_proxy:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
 requiresig: {}
 sigmention: {}
 slack: {}
