@@ -117,7 +117,7 @@ postsubmits:
     build_spec:
       serviceAccountName: knative-build-bot
       template:
-        name: jenkins-go-script-release
+        name: /jenkins-go-script-bdd
     name: release
 
   jenkins-x/jenkins-x-extensions:
