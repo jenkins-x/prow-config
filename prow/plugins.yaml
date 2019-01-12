@@ -668,6 +668,19 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x-images/allure:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   jenkins-x-images/xunit-viewer:
   - approve
   - heart
