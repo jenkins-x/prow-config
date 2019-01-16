@@ -1190,3 +1190,6 @@ tide:
     - jenkins-x/jx
     - jenkinsci/jx-resources-plugin
   target_url: https://core.jx.cd.jenkins-x.io/teams/jx/pipelines
+plank:
+  controller:
+    allow_cancellations: true
