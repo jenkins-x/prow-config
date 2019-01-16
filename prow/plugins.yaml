@@ -52,7 +52,6 @@ lgtm:
 - repos:
   - jenkins-x/jx
   review_acts_as_lgtm: true
-  trusted_team_for_sticky_lgtm: sticky-lgtm
 - repos:
   - jenkinsci/jx-resources-plugin
   review_acts_as_lgtm: true
