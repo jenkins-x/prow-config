@@ -14,7 +14,7 @@ triggers:
   - prow
   - jx-build-templates
   - vault-operator
-  - athens
+  - athens-proxy
   - openshift-namespace-rbac-chart
   trusted_org: jenkins-x-charts
   only_org_members: true
@@ -216,7 +216,7 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x-charts/athens:
+  jenkins-x-charts/athens-proxy:
   - approve
   - heart
   - assign
