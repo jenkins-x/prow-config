@@ -17,6 +17,9 @@ branch-protection:
         jx-app-grafana:
           required_status_checks:
             contexts: ["knative-build"]
+        jx-app-athens:
+          required_status_checks:
+            contexts: ["knative-build"]
         jx-app-cheese:
           required_status_checks:
             contexts: ["serverless-jenkins"]
@@ -271,6 +274,19 @@ postsubmits:
         - name: WORKSPACE
           value: /workspace/jx-app-grafana
     name: release
+
+  jenkins-x-apps/jx-app-athens:
+    - agent: knative-build
+      branches:
+        - master
+      build_spec:
+        serviceAccountName: knative-build-bot
+        template:
+          name: knative-chart-release
+          arguments:
+            - name: WORKSPACE
+              value: /workspace/jx-app-athens
+      name: release
 
   jenkins-x-charts/jx-build-templates:
   - agent: knative-build
@@ -793,6 +809,21 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  jenkins-x-apps/jx-app-athens:
+    - agent: knative-build
+      always_run: true
+
+      build_spec:
+        template:
+          name: knative-chart-ci
+          arguments:
+            - name: WORKSPACE
+              value: /workspace/jx-app-athens
+      context: knative-build
+      name: knative-build
+      rerun_command: /test this
+      trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x-charts/openshift-namespace-rbac-chart:
   - agent: knative-build
     always_run: true
@@ -1170,6 +1201,7 @@ tide:
     - jenkins-x-apps/jx-app-sonarqube
     - jenkins-x-apps/jx-app-gitea
     - jenkins-x-apps/jx-app-grafana
+    - jenkins-x-apps/jx-app-athens
     - jenkins-x-charts/vault-operator
     - jenkins-x-charts/athens-proxy
     - jenkins-x-charts/jx-build-templates
