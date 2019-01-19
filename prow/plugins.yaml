@@ -14,6 +14,7 @@ triggers:
   - prow
   - jx-build-templates
   - vault-operator
+  - athens
   - openshift-namespace-rbac-chart
   trusted_org: jenkins-x-charts
   only_org_members: true
@@ -203,6 +204,19 @@ plugins:
   - wip
   - cat
   jenkins-x-charts/vault-operator:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  jenkins-x-charts/athens:
   - approve
   - heart
   - assign
