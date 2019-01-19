@@ -203,19 +203,6 @@ postsubmits:
           value: /workspace/vault-operator
     name: release
 
-  jenkins-x-charts/athens:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: knative-chart-release
-        arguments:
-        - name: WORKSPACE
-          value: /workspace/athens
-    name: release
-
   cloudbees/cb-app-slack:
   - agent: knative-build
     branches:
@@ -712,21 +699,6 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  jenkins-x-charts/athens:
-  - agent: knative-build
-    always_run: true
-
-    build_spec:
-      template:
-        name: knative-chart-ci
-        arguments:
-        - name: WORKSPACE
-          value: /workspace/athens
-    context: knative-build
-    name: knative-build
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-
   cloudbees/cb-app-slack:
   - agent: knative-build
     always_run: true
@@ -1171,7 +1143,6 @@ tide:
     - jenkins-x-apps/jx-app-gitea
     - jenkins-x-apps/jx-app-grafana
     - jenkins-x-charts/vault-operator
-    - jenkins-x-charts/athens
     - jenkins-x-charts/jx-build-templates
     - jenkins-x-charts/openshift-namespace-rbac-chart
     - jenkins-x-charts/knative

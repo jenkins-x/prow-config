@@ -14,7 +14,6 @@ triggers:
   - prow
   - jx-build-templates
   - vault-operator
-  - athens
   - openshift-namespace-rbac-chart
   trusted_org: jenkins-x-charts
   only_org_members: true
@@ -22,7 +21,6 @@ triggers:
   - core-frontend
   - core-backend
   - haha
-  - policy-engine
   - cloudbees-apps
   - cb-app-slack
   trusted_org: cloudbees
@@ -69,6 +67,7 @@ config_updater:
 heart:
   adorees:
   - jenkins-x-bot
+
 owners: {}
 plugins:
   jenkins-x/prow-config:
@@ -140,7 +139,7 @@ plugins:
   - cat
   cloudbees/cb-app-slack:
   - approve
-  - heart`
+  - heart
   - assign
   - blunderbuss
   - help
@@ -216,19 +215,6 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x-charts/athens:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
   jenkins-x-charts/openshift-namespace-rbac-chart:
   - approve
   - heart
@@ -282,19 +268,6 @@ plugins:
   - wip
   - cat
   cloudbees/haha:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
-  cloudbees/policy-engine:
   - approve
   - heart
   - assign
@@ -606,6 +579,19 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x/jx-quickstarts-bdd-test-job:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   jenkins-x/ext-spotbugs:
   - approve
   - heart
@@ -670,6 +656,45 @@ plugins:
   - trigger
   - wip
   jenkinsci/jx-resources-plugin:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  jenkins-x-images/allure:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  jenkins-x-images/xunit-viewer:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  jenkins-x-images/oauth2_proxy:
   - approve
   - heart
   - assign
