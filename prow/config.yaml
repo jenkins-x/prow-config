@@ -337,7 +337,7 @@ postsubmits:
         name: knative-chart-release
         arguments:
         - name: WORKSPACE
-          value: /workspace/knative-build-pipeline
+          value: /workspace
     name: release
 
   jenkins-x-charts/prow:
@@ -888,7 +888,7 @@ presubmits:
         name: knative-chart-ci
         arguments:
         - name: WORKSPACE
-          value: /workspace/knative-build-pipeline
+          value: /workspace
     context: knative-build
     name: knative-build
     rerun_command: /test this
