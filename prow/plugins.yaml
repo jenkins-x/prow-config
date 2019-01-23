@@ -16,6 +16,7 @@ triggers:
   - vault-operator
   - athens-proxy
   - openshift-namespace-rbac-chart
+  - knative-build-pipeline
   trusted_org: jenkins-x-charts
   only_org_members: true
 - repos:
@@ -464,6 +465,20 @@ plugins:
   - wip
   - cat
   jenkins-x-charts/knative:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  - cat
+  jenkins-x-charts/knative-build-pipeline:
   - approve
   - heart
   - assign
