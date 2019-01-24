@@ -173,16 +173,6 @@ postsubmits:
         name: jenkins-go
     name: release
 
-  jenkins-x/ext-jacoco:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
-
   jenkins-x/ext-java-code-quality:
   - agent: knative-build
     branches:
@@ -702,18 +692,6 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  jenkins-x/ext-jacoco:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-
   jenkins-x/ext-java-code-quality:
   - agent: knative-build
     always_run: true
@@ -769,6 +747,18 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
 
   jenkins-x-apps/jx-app-cheese:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  jenkins-x-apps/jx-app-jacoco:
   - agent: knative-build
     always_run: true
     build_spec:
@@ -1221,10 +1211,10 @@ tide:
     - jenkins-x-bot/environment-jenkinsx-dev-production
     - jenkins-x/dex
     - jenkins-x/oauth2_proxy
-    - jenkins-x/ext-jacoco
     - jenkins-x/jenkins-x-builders
     - jenkins-x/jenkins-x-serverless
     - jenkins-x-apps/jx-app-cheese
+    - jenkins-x-apps/jx-app-jacoco
     - jenkins-x-apps/jx-app-sonarqube
     - jenkins-x-apps/jx-app-gitea
     - jenkins-x-apps/jx-app-grafana
