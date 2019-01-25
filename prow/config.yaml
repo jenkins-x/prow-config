@@ -228,7 +228,17 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-  
+
+  jenkins-x-apps/jx-app-jacoco:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    name: release
+
   jenkins-x-apps/jx-app-sonarqube:
   - agent: knative-build
     branches:
