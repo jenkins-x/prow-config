@@ -601,21 +601,15 @@ presubmits:
     build_spec:
       serviceAccountName: knative-build-bot
       template:
-        name: jenkins-go
+        # temporary switched to simpler pipeline
+        # while we figure out the memory issues
+        #
+        # name: jenkins-go
+        name: jenkins-go-script-ci
     context: serverless-jenkins
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go-script-ci
-    context: knative-build
-    name: knative-build
-    rerun_command: /test knative
-    trigger: (?m)^/test( knative),?(\s+|$)
 
   jenkins-x/oauth2_proxy:
   - agent: knative-build
