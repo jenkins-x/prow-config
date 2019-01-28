@@ -612,10 +612,10 @@ presubmits:
       serviceAccountName: knative-build-bot
       template:
         name: jenkins-go-script-ci
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
+    context: knative-build
+    name: knative-build
+    rerun_command: /test knative
+    trigger: (?m)^/test( knative),?(\s+|$)
 
   jenkins-x/oauth2_proxy:
   - agent: knative-build
