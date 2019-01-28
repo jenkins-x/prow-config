@@ -22,6 +22,7 @@ triggers:
 - repos:
   - core-frontend
   - core-backend
+  - core-controllers
   - haha
   - cloudbees-apps
   - cb-app-slack
@@ -48,6 +49,10 @@ approve:
   repos:
   - cloudbees/core-backend
   review_acts_as_approve: true
+- lgtm_acts_as_approve: true
+  repos:
+  - cloudbees/core-controllers
+  review_acts_as_approve: true
 blunderbuss: {}
 cat: {}
 lgtm:
@@ -59,6 +64,9 @@ lgtm:
   review_acts_as_lgtm: true
 - repos:
   - cloudbees/core-backend
+  review_acts_as_lgtm: true
+- repos:
+  - cloudbees/core-controller
   review_acts_as_lgtm: true
 config_updater:
   maps:
@@ -672,6 +680,18 @@ plugins:
   - trigger
   - wip
   - yuks
+  cloudbees/core-controllers:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
   cloudbees/policy-tests:
   - approve
   - heart
