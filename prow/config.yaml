@@ -601,11 +601,8 @@ presubmits:
     build_spec:
       serviceAccountName: knative-build-bot
       template:
-        # temporary switched to simpler pipeline
-        # while we figure out the memory issues
-        #
-        # name: jenkins-go
-        name: jenkins-go-script-ci
+        name: jenkins-go
+        #name: jenkins-go-script-ci
     context: serverless-jenkins
     name: serverless-jenkins
     rerun_command: /test this
