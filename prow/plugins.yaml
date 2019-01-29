@@ -139,6 +139,19 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x/jenkins-x-serverless-filerunner:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   cloudbees/cb-app-slack:
   - approve
   - heart

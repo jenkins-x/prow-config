@@ -163,6 +163,16 @@ postsubmits:
         name: jenkins-cwp
     name: release
 
+  jenkins-x/jenkins-x-serverless-filerunner:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-cwp
+    name: release
+
   jenkins-x/dex:
   - agent: knative-build
     branches:
@@ -656,6 +666,18 @@ presubmits:
     trigger: (?m)^/test gcb,?(\s+|$)
 
   jenkins-x/jenkins-x-serverless:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-cwp
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  jenkins-x/jenkins-x-serverless-filerunner:
   - agent: knative-build
     always_run: true
     build_spec:
@@ -1224,6 +1246,7 @@ tide:
     - jenkins-x/oauth2_proxy
     - jenkins-x/jenkins-x-builders
     - jenkins-x/jenkins-x-serverless
+    - jenkins-x/jenkins-x-serverless-filerunner
     - jenkins-x-apps/jx-app-cheese
     - jenkins-x-apps/jx-app-jacoco
     - jenkins-x-apps/jx-app-sonarqube
