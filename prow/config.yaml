@@ -160,7 +160,7 @@ postsubmits:
     build_spec:
       serviceAccountName: knative-build-bot
       template:
-        name: jenkins-cwp
+        name: jenkins-go
     name: release
 
   jenkins-x/jenkins-x-serverless-filerunner:
@@ -671,7 +671,7 @@ presubmits:
     build_spec:
       serviceAccountName: knative-build-bot
       template:
-        name: jenkins-cwp
+        name: jenkins-go
     context: serverless-jenkins
     name: serverless-jenkins
     rerun_command: /test this
