@@ -39,6 +39,9 @@ branch-protection:
         core-frontend:
           required_status_checks:
             contexts: ["serverless-jenkins"]
+        core-controllers:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         haha:
           required_status_checks:
             contexts: ["serverless-jenkins"]
@@ -548,6 +551,16 @@ postsubmits:
       serviceAccountName: knative-build-bot
       template:
         name: jenkins-javascript
+    name: release
+
+  cloudbees/core-controllers:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
     name: release
 
   cloudbees/haha:
@@ -1146,7 +1159,19 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  cloudbees/policy-tests:
+  cloudbees/core-frontend:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-javascript
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  cloudbees/core-controllers:
   - agent: knative-build
     always_run: true
     build_spec:
@@ -1158,13 +1183,13 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  cloudbees/core-frontend:
+  cloudbees/policy-tests:
   - agent: knative-build
     always_run: true
     build_spec:
       serviceAccountName: knative-build-bot
       template:
-        name: jenkins-javascript
+        name: jenkins-go
     context: serverless-jenkins
     name: serverless-jenkins
     rerun_command: /test this
@@ -1229,6 +1254,7 @@ tide:
     repos:
     - cloudbees/core-backend
     - cloudbees/core-frontend
+    - cloudbees/core-controllers
     - cloudbees/haha
     - cloudbees/cloudbees-apps
   - labels:
@@ -1285,6 +1311,7 @@ tide:
     - jenkins-x-images/xunit-viewer
     - cloudbees/core-backend
     - cloudbees/core-frontend
+    - cloudbees/core-controllers
     - cloudbees/haha
     - cloudbees/cb-app-slack
     - cloudbees/cloudbees-apps
