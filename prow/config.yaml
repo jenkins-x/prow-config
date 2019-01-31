@@ -51,9 +51,6 @@ branch-protection:
         cb-app-slack:
           required_status_checks:
             contexts: ["serverless-jenkins"]
-        policy-tests:
-          required_status_checks:
-            contexts: ["serverless-jenkins"]
 
 owners_dir_blacklist:
   default: null
@@ -1183,18 +1180,6 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  cloudbees/policy-tests:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-  
   cloudbees/haha:
   - agent: knative-build
     always_run: true
@@ -1315,7 +1300,6 @@ tide:
     - cloudbees/haha
     - cloudbees/cb-app-slack
     - cloudbees/cloudbees-apps
-    - cloudbees/policy-tests
     - jenkinsci/jx-resources-plugin
   - labels:
     - approved
