@@ -29,10 +29,6 @@ triggers:
   trusted_org: cloudbees
   only_org_members: true
 - repos:
-  - cloudbees/policy-tests
-  trusted_org: cloudbees
-  only_org_members: true
-- repos:
   - jenkinsci/jx-resources-plugin
   trusted_org: jenkinsci
   only_org_members: true
@@ -705,19 +701,6 @@ plugins:
   - size
   - trigger
   - wip
-  cloudbees/policy-tests:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - yuks
   jenkins-x-charts/jx-build-templates:
   - approve
   - heart
