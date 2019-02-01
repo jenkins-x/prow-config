@@ -79,6 +79,16 @@ heart:
   - jenkins-x-bot
 
 owners: {}
+external_plugins:
+  jenkins-x/jx:
+  - endpoint: http://cb-app-slack
+    name: cb-app-slack
+  jenkins-x-apps/jx-app-jacoco:
+  - endpoint: http://cb-app-slack
+    name: cb-app-slack
+  jenkins-x-apps/jx-app-cheese:
+  - endpoint: http://cb-app-slack
+    name: cb-app-slack
 plugins:
   jenkins-x/prow-config:
   - config-updater
