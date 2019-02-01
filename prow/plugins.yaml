@@ -35,20 +35,24 @@ triggers:
 approve:
 - lgtm_acts_as_approve: true
   repos:
-  - jenkins-x/jx
-  review_acts_as_approve: true
+  - jenkins-x
+  require_self_approval: true
 - lgtm_acts_as_approve: true
   repos:
-  - jenkinsci/jx-resources-plugin
-  review_acts_as_approve: true
+  - jenkins-x-charts
+  require_self_approval: true
 - lgtm_acts_as_approve: true
   repos:
-  - cloudbees/core-backend
-  review_acts_as_approve: true
+  - jenkins-x-apps
+  require_self_approval: true
 - lgtm_acts_as_approve: true
   repos:
-  - cloudbees/core-controllers
-  review_acts_as_approve: true
+  - jenkinsci
+  require_self_approval: true
+- lgtm_acts_as_approve: true
+  repos:
+  - cloudbees
+  require_self_approval: true
 blunderbuss: {}
 cat: {}
 lgtm:
