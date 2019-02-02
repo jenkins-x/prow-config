@@ -122,7 +122,6 @@ plugins:
   - approve
   - heart
   - assign
-  - blunderbuss
   - help
   - hold
   - lgtm
@@ -187,7 +186,6 @@ plugins:
   - approve
   - heart
   - assign
-  - blunderbuss
   - help
   - hold
   - lgtm
@@ -200,7 +198,6 @@ plugins:
   - approve
   - heart
   - assign
-  - blunderbuss
   - help
   - hold
   - lgtm
@@ -213,7 +210,6 @@ plugins:
   - approve
   - heart
   - assign
-  - blunderbuss
   - help
   - hold
   - lgtm
@@ -226,7 +222,6 @@ plugins:
   - approve
   - heart
   - assign
-  - blunderbuss
   - help
   - hold
   - lgtm
@@ -239,7 +234,6 @@ plugins:
   - approve
   - heart
   - assign
-  - blunderbuss
   - help
   - hold
   - lgtm
@@ -252,7 +246,6 @@ plugins:
     - approve
     - heart
     - assign
-    - blunderbuss
     - help
     - hold
     - lgtm
