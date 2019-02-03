@@ -385,6 +385,15 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
+  jenkins-x/jenkins-x-versions:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go-script-release
+    name: release
   jenkins-x/exposecontroller:
   - agent: knative-build
     branches:
@@ -962,6 +971,17 @@ presubmits:
       serviceAccountName: knative-build-bot
       template:
         name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  jenkins-x/jenkins-x-versions:
+  - agent: knative-build
+    always_run: false
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go-script-ci
     context: serverless-jenkins
     name: serverless-jenkins
     rerun_command: /test this
