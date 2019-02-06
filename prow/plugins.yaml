@@ -130,6 +130,8 @@ plugins:
   - size
   - trigger
   - wip
+  - cat
+  - dog
   jenkins-x/jenkins-x-builders:
   - approve
   - heart
