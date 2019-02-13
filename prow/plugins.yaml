@@ -145,6 +145,19 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x/jenkins-x-builders-base-image:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   jenkins-x/jenkins-x-serverless:
   - approve
   - heart
