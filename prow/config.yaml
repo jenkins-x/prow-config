@@ -1255,25 +1255,6 @@ tide:
     skip-unknown-contexts: false
   queries:
   - labels:
-    - updatebot
-    missingLabels:
-    - do-not-merge
-    - do-not-merge/hold
-    - do-not-merge/work-in-progress
-    - needs-ok-to-test
-    - needs-rebase
-    orgs:
-    - jenkins-x
-    - jenkins-x-charts
-    - jenkins-x-apps
-    - jenkins-x-images
-    repos:
-    - cloudbees/core-backend
-    - cloudbees/core-frontend
-    - cloudbees/core-controllers
-    - cloudbees/haha
-    - cloudbees/cloudbees-apps
-  - labels:
     - approved
     missingLabels:
     - do-not-merge
@@ -1346,4 +1327,23 @@ tide:
     repos:
     - jenkins-x/jx
     - jenkinsci/jx-resources-plugin
+  - labels:
+    - updatebot
+    missingLabels:
+    - do-not-merge
+    - do-not-merge/hold
+    - do-not-merge/work-in-progress
+    - needs-ok-to-test
+    - needs-rebase
+    orgs:
+    - jenkins-x
+    - jenkins-x-charts
+    - jenkins-x-apps
+    - jenkins-x-images
+    repos:
+    - cloudbees/core-backend
+    - cloudbees/core-frontend
+    - cloudbees/core-controllers
+    - cloudbees/haha
+    - cloudbees/cloudbees-apps
   target_url: https://core.jx.cd.jenkins-x.io/teams/jx/pipelines
