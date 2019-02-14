@@ -988,7 +988,7 @@ presubmits:
     trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/jenkins-x-versions:
   - agent: knative-build
-    always_run: false
+    always_run: true
     build_spec:
       serviceAccountName: knative-build-bot
       template:
@@ -1326,6 +1326,7 @@ tide:
     - jenkins-x/updatebot
     - jenkins-x/vscode-jx-tools
     - jenkins-x-images/xunit-viewer
+    - jenkins-x/jenkins-x-versions
     - cloudbees/core-backend
     - cloudbees/core-frontend
     - cloudbees/core-controllers
