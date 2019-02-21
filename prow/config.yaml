@@ -395,15 +395,6 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-  jenkins-x/jenkins-x-versions:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go-script-release
-    name: release
   jenkins-x/exposecontroller:
   - agent: knative-build
     branches:
@@ -986,17 +977,6 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/jenkins-x-versions:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go-script-ci
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/exposecontroller:
   - agent: knative-build
     always_run: true
@@ -1307,7 +1287,6 @@ tide:
     - jenkins-x/updatebot
     - jenkins-x/vscode-jx-tools
     - jenkins-x-images/xunit-viewer
-    - jenkins-x/jenkins-x-versions
     - cloudbees/core-backend
     - cloudbees/core-frontend
     - cloudbees/core-controllers
