@@ -23,6 +23,9 @@ branch-protection:
         jx-app-cheese:
           required_status_checks:
             contexts: ["serverless-jenkins"]
+        jx-app-jenkins:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         jx-app-sonarqube:
           required_status_checks:
             contexts: ["serverless-jenkins"]
@@ -306,6 +309,19 @@ postsubmits:
           arguments:
             - name: WORKSPACE
               value: /workspace/jx-app-athens
+      name: release
+
+  jenkins-x-apps/jx-app-jenkins:
+    - agent: knative-build
+      branches:
+        - master
+      build_spec:
+        serviceAccountName: knative-build-bot
+        template:
+          name: knative-chart-release
+          arguments:
+            - name: WORKSPACE
+              value: /workspace/jx-app-jenkins
       name: release
 
   jenkins-x-charts/jx-build-templates:
@@ -876,6 +892,21 @@ presubmits:
           arguments:
             - name: WORKSPACE
               value: /workspace/jx-app-athens
+      context: knative-build
+      name: knative-build
+      rerun_command: /test this
+      trigger: (?m)^/test( all| this),?(\s+|$)
+
+  jenkins-x-apps/jx-app-jenkins:
+    - agent: knative-build
+      always_run: true
+
+      build_spec:
+        template:
+          name: knative-chart-ci
+          arguments:
+            - name: WORKSPACE
+              value: /workspace/jx-app-jenkins
       context: knative-build
       name: knative-build
       rerun_command: /test this

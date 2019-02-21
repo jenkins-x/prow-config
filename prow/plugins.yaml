@@ -269,6 +269,18 @@ plugins:
     - trigger
     - wip
     - cat
+  jenkins-x-apps/jx-app-jenkins:
+    - approve
+    - heart
+    - assign
+    - help
+    - hold
+    - lgtm
+    - lifecycle
+    - size
+    - trigger
+    - wip
+    - cat
   jenkins-x-charts/vault-operator:
   - approve
   - heart
