@@ -363,7 +363,7 @@ postsubmits:
           value: /workspace/knative-build
     name: release
 
-  jenkins-x-charts/knative-build-pipeline:
+  jenkins-x-charts/tekton:
   - agent: knative-build
     branches:
     - master
@@ -373,7 +373,7 @@ postsubmits:
         name: knative-chart-release
         arguments:
         - name: WORKSPACE
-          value: /workspace/knative-build-pipeline
+          value: /workspace/tekton
     name: release
 
   jenkins-x-charts/prow:
@@ -955,7 +955,7 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  jenkins-x-charts/knative-build-pipeline:
+  jenkins-x-charts/tekton:
   - agent: knative-build
     always_run: true
     build_spec:
@@ -963,7 +963,7 @@ presubmits:
         name: knative-chart-ci
         arguments:
         - name: WORKSPACE
-          value: /workspace/knative-build-pipeline
+          value: /workspace/tekton
     context: knative-build
     name: knative-build
     rerun_command: /test this
@@ -1293,7 +1293,7 @@ tide:
     - jenkins-x-charts/jx-build-templates
     - jenkins-x-charts/openshift-namespace-rbac-chart
     - jenkins-x-charts/knative
-    - jenkins-x-charts/knative-build-pipeline
+    - jenkins-x-charts/tekton
     - jenkins-x-charts/prow
     - jenkins-x-charts/gerrit
     - jenkins-x/ext-java-code-quality
