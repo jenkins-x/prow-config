@@ -822,7 +822,7 @@ presubmits:
     build_spec:
       serviceAccountName: knative-build-bot
       template:
-        name: jenkins-go
+        name: jenkins-go2
     context: serverless-jenkins
     name: serverless-jenkins
     rerun_command: /test this
