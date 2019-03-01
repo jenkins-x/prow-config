@@ -515,7 +515,7 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x-charts/knative:
+  jenkins-x-charts/knative-build:
   - approve
   - heart
   - assign

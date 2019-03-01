@@ -350,7 +350,7 @@ postsubmits:
           value: /workspace/openshift-namespace-rbac
     name: release
 
-  jenkins-x-charts/knative:
+  jenkins-x-charts/knative-build:
   - agent: knative-build
     branches:
     - master
@@ -941,7 +941,7 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  jenkins-x-charts/knative:
+  jenkins-x-charts/knative-build:
   - agent: knative-build
     always_run: true
     build_spec:
