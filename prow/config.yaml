@@ -641,19 +641,6 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  jenkins-x/jx:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-        #name: jenkins-go-script-ci
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-
   jenkins-x/oauth2_proxy:
   - agent: knative-build
     always_run: true
@@ -1323,7 +1310,6 @@ tide:
     - needs-ok-to-test
     - needs-rebase
     repos:
-    - jenkins-x/jx
     - jenkinsci/jx-resources-plugin
   - labels:
     - updatebot
