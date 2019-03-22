@@ -324,6 +324,16 @@ postsubmits:
               value: /workspace/jx-app-jenkins
       name: release
 
+  jenkins-x-apps/jx-app-test-lifecycle:
+  - agent: knative-build
+    branches:
+      - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    name: release
+
   jenkins-x-charts/jx-build-templates:
   - agent: knative-build
     branches:
@@ -857,6 +867,18 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  jenkins-x-apps/jx-app-test-lifecycle:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x-apps/jx-app-athens:
     - agent: knative-build
       always_run: true
@@ -1263,6 +1285,7 @@ tide:
     - jenkins-x-apps/jx-app-gitea
     - jenkins-x-apps/jx-app-grafana
     - jenkins-x-apps/jx-app-athens
+    - jenkins-x-apps/jx-app-test-lifecycle
     - jenkins-x-charts/vault-operator
     - jenkins-x-charts/athens-proxy
     - jenkins-x-charts/jx-build-templates
