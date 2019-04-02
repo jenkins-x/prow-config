@@ -412,15 +412,6 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-  jenkins-x/homebrew-jx:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
   jenkins-x/jenkins-x-image:
   - agent: knative-build
     branches:
@@ -967,17 +958,6 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/homebrew-jx:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/jenkins-x-image:
   - agent: knative-build
     always_run: true
@@ -1223,7 +1203,6 @@ tide:
     - jenkins-x/cloud-environments
     - jenkins-x/exposecontroller
     - jenkins-x/exposecontroller-service
-    - jenkins-x/homebrew-jx
     - jenkins-x/jenkins-x-image
     - jenkins-x/jenkins-x-platform
     - jenkins-x/ext-spotbugs

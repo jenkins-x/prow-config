@@ -385,19 +385,6 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x/homebrew-jx:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
   jenkins-x/jenkins-x-image:
   - approve
   - heart
