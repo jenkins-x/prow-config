@@ -421,15 +421,6 @@ postsubmits:
       template:
         name: jenkins-base
     name: release
-  jenkins-x/jx-docs:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
   jenkins-x/jx-java-client:
   - agent: knative-build
     branches:
@@ -960,17 +951,6 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/jx-docs:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/jx-java-client:
   - agent: knative-build
     always_run: true
@@ -1186,7 +1166,6 @@ tide:
     - jenkins-x/jenkins-x-platform
     - jenkins-x/ext-spotbugs
     - jenkins-x/jenkins-x-extensions
-    - jenkins-x/jx-docs
     - jenkins-x/jx-java-client
     - jenkins-x/jx-quickstarts-bdd-test-job
     - jenkins-x/jx-release-version

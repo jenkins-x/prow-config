@@ -398,19 +398,6 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x/jx-docs:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
   jenkins-x/jx-java-client:
   - approve
   - heart
