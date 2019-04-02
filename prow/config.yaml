@@ -149,46 +149,6 @@ postsubmits:
         name: jenkins-go
     name: release
 
-  jenkins-x/jenkins-x-builders:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
-
-  jenkins-x/jenkins-x-builders-base-image:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
-
-  jenkins-x/jenkins-x-serverless:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
-
-  jenkins-x/jenkins-x-serverless-filerunner:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-cwp
-    name: release
-
   jenkins-x/dex:
   - agent: knative-build
     branches:
@@ -506,15 +466,6 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-  jenkins-x/jx-tutorial:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
   jenkins-x/metrics:
   - agent: knative-build
     branches:
@@ -683,42 +634,6 @@ presubmits:
       serviceAccountName: knative-build-bot
       template:
         name: jenkins-go-script-ci
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-
-  jenkins-x/jenkins-x-builders:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-
-  jenkins-x/jenkins-x-builders-base-image:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-
-  jenkins-x/jenkins-x-serverless-filerunner:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-cwp
     context: serverless-jenkins
     name: serverless-jenkins
     rerun_command: /test this
@@ -1118,17 +1033,6 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/jx-tutorial:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/metrics:
   - agent: knative-build
     always_run: true
@@ -1300,10 +1204,6 @@ tide:
     - jenkins-x-bot/environment-jenkinsx-dev-production
     - jenkins-x/dex
     - jenkins-x/oauth2_proxy
-    - jenkins-x/jenkins-x-builders
-    - jenkins-x/jenkins-x-builders-base-image
-    - jenkins-x/jenkins-x-serverless
-    - jenkins-x/jenkins-x-serverless-filerunner
     - jenkins-x-apps/jx-app-cheese
     - jenkins-x-apps/jx-app-jacoco
     - jenkins-x-apps/jx-app-sonarqube
@@ -1332,7 +1232,6 @@ tide:
     - jenkins-x/jx-java-client
     - jenkins-x/jx-quickstarts-bdd-test-job
     - jenkins-x/jx-release-version
-    - jenkins-x/jx-tutorial
     - jenkins-x/metrics
     - jenkins-x/nexus
     - jenkins-x/pipeline-events-addon
