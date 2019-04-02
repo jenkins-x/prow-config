@@ -581,19 +581,6 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x/updatebot:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
   jenkins-x/vscode-jx-tools:
   - approve
   - heart

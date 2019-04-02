@@ -511,15 +511,6 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-  jenkins-x/updatebot:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-maven
-    name: release
   jenkins-x/vscode-jx-tools:
   - agent: knative-build
     branches:
@@ -1088,17 +1079,6 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/updatebot:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-maven
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
 
   jenkins-x/vscode-jx-tools:
   - agent: knative-build
@@ -1237,7 +1217,6 @@ tide:
     - jenkins-x/pipeline-events-addon
     - jenkins-x/sso-operator
     - jenkins-x/terraform-provider-jx
-    - jenkins-x/updatebot
     - jenkins-x/vscode-jx-tools
     - jenkins-x-images/xunit-viewer
     - cloudbees/core-backend
