@@ -451,19 +451,6 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x/nexus:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
   jenkins-x/pipeline-events-addon:
   - approve
   - heart

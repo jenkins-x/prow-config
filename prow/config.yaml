@@ -439,15 +439,6 @@ postsubmits:
       template:
         name: jenkins-base
     name: release
-  jenkins-x/nexus:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-base
-    name: release
   jenkins-x/pipeline-events-addon:
   - agent: knative-build
     branches:
@@ -955,17 +946,6 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/nexus:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-base
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/pipeline-events-addon:
   - agent: knative-build
     always_run: true
@@ -1129,7 +1109,6 @@ tide:
     - jenkins-x/jx-quickstarts-bdd-test-job
     - jenkins-x/jx-release-version
     - jenkins-x/metrics
-    - jenkins-x/nexus
     - jenkins-x/pipeline-events-addon
     - jenkins-x/sso-operator
     - jenkins-x/terraform-provider-jx
