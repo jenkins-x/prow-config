@@ -17,7 +17,13 @@ branch-protection:
         jx-app-grafana:
           required_status_checks:
             contexts: ["knative-build"]
+        jx-app-athens:
+          required_status_checks:
+            contexts: ["knative-build"]
         jx-app-cheese:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
+        jx-app-jenkins:
           required_status_checks:
             contexts: ["serverless-jenkins"]
         jx-app-sonarqube:
@@ -36,12 +42,18 @@ branch-protection:
         core-frontend:
           required_status_checks:
             contexts: ["serverless-jenkins"]
+        core-controllers:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]
         cloudbees-apps:
           required_status_checks:
             contexts: ["serverless-jenkins"]
         cb-app-slack:
           required_status_checks:
             contexts: ["serverless-jenkins"]
+        cb-app-sor:
+          required_status_checks:
+            contexts: ["serverless-jenkins"]            
 
 owners_dir_blacklist:
   default: null
@@ -64,6 +76,16 @@ periodics:
 #       name: upgrade-addons
 
 postsubmits:
+  jenkins-x-images/allure:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go-script-release
+    name: release
+
   jenkins-x-images/xunit-viewer:
   - agent: knative-build
     branches:
@@ -82,6 +104,26 @@ postsubmits:
       serviceAccountName: knative-build-bot
       template:
         name: jenkins-go
+    name: release
+
+  jenkins-x/oauth2_proxy:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    name: release
+
+  jenkins-x/jx-quickstarts-bdd-test-job:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go-script-bdd
     name: release
 
   jenkins-x/jenkins-x-extensions:
@@ -104,37 +146,7 @@ postsubmits:
         name: jenkins-go
     name: release
 
-  jenkins-x/jenkins-x-builders:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
-
-  jenkins-x/jenkins-x-serverless:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-cwp
-    name: release
-
   jenkins-x/dex:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
-
-  jenkins-x/ext-jacoco:
   - agent: knative-build
     branches:
     - master
@@ -167,6 +179,19 @@ postsubmits:
           value: /workspace/vault-operator
     name: release
 
+  jenkins-x-charts/athens-proxy:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: knative-chart-release
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/athens-proxy
+    name: release
+
   cloudbees/cb-app-slack:
   - agent: knative-build
     branches:
@@ -177,6 +202,16 @@ postsubmits:
         name: jenkins-go
     name: release
 
+  cloudbees/cb-app-sor:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    name: release    
+
   jenkins-x-apps/jx-app-cheese:
   - agent: knative-build
     branches:
@@ -186,7 +221,17 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-  
+
+  jenkins-x-apps/jx-app-jacoco:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    name: release
+
   jenkins-x-apps/jx-app-sonarqube:
   - agent: knative-build
     branches:
@@ -223,6 +268,42 @@ postsubmits:
           value: /workspace/jx-app-grafana
     name: release
 
+  jenkins-x-apps/jx-app-athens:
+    - agent: knative-build
+      branches:
+        - master
+      build_spec:
+        serviceAccountName: knative-build-bot
+        template:
+          name: knative-chart-release
+          arguments:
+            - name: WORKSPACE
+              value: /workspace/jx-app-athens
+      name: release
+
+  jenkins-x-apps/jx-app-jenkins:
+    - agent: knative-build
+      branches:
+        - master
+      build_spec:
+        serviceAccountName: knative-build-bot
+        template:
+          name: knative-chart-release
+          arguments:
+            - name: WORKSPACE
+              value: /workspace/jx-app-jenkins
+      name: release
+
+  jenkins-x-apps/jx-app-test-lifecycle:
+  - agent: knative-build
+    branches:
+      - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    name: release
+
   jenkins-x-charts/jx-build-templates:
   - agent: knative-build
     branches:
@@ -249,7 +330,7 @@ postsubmits:
           value: /workspace/openshift-namespace-rbac
     name: release
 
-  jenkins-x-charts/knative:
+  jenkins-x-charts/knative-build:
   - agent: knative-build
     branches:
     - master
@@ -260,6 +341,19 @@ postsubmits:
         arguments:
         - name: WORKSPACE
           value: /workspace/knative-build
+    name: release
+
+  jenkins-x-charts/tekton:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: knative-chart-release
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/tekton
     name: release
 
   jenkins-x-charts/prow:
@@ -315,42 +409,6 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-  jenkins-x/homebrew-jx:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
-  jenkins-x/jenkins-x-image:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-base
-    name: release
-  jenkins-x/jenkins-x-platform:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-base
-    name: release
-  jenkins-x/jx-docs:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
   jenkins-x/jx-java-client:
   - agent: knative-build
     branches:
@@ -369,25 +427,7 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-  jenkins-x/jx-tutorial:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
   jenkins-x/metrics:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-base
-    name: release
-  jenkins-x/nexus:
   - agent: knative-build
     branches:
     - master
@@ -423,15 +463,6 @@ postsubmits:
       template:
         name: jenkins-go
     name: release
-  jenkins-x/updatebot:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-maven
-    name: release
   jenkins-x/vscode-jx-tools:
   - agent: knative-build
     branches:
@@ -460,6 +491,16 @@ postsubmits:
       serviceAccountName: knative-build-bot
       template:
         name: jenkins-javascript
+    name: release
+
+  cloudbees/core-controllers:
+  - agent: knative-build
+    branches:
+    - master
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
     name: release
 
   cloudbees/cloudbees-apps:
@@ -483,6 +524,18 @@ postsubmits:
     name: release
 
 presubmits:
+  jenkins-x-images/allure:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go-script-ci
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x-images/xunit-viewer:
   - agent: knative-build
     always_run: true
@@ -495,7 +548,7 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  jenkins-x/jx:
+  jenkins-x/oauth2_proxy:
   - agent: knative-build
     always_run: true
     build_spec:
@@ -507,36 +560,13 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  jenkins-x/jenkins-x-builders:
+  jenkins-x/jx-quickstarts-bdd-test-job:
   - agent: knative-build
     always_run: true
     build_spec:
       serviceAccountName: knative-build-bot
       template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-
-  - agent: knative-build
-    always_run: false
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go-nodocker
-    context: serverless-jenkins
-    name: serverless-jenkins-nodocker
-    rerun_command: /test gcb
-    trigger: (?m)^/test gcb,?(\s+|$)
-
-  jenkins-x/jenkins-x-serverless:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-cwp
+        name: jenkins-go-script-ci
     context: serverless-jenkins
     name: serverless-jenkins
     rerun_command: /test this
@@ -578,18 +608,6 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  jenkins-x/ext-jacoco:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-
   jenkins-x/ext-java-code-quality:
   - agent: knative-build
     always_run: true
@@ -617,6 +635,21 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  jenkins-x-charts/athens-proxy:
+  - agent: knative-build
+    always_run: true
+
+    build_spec:
+      template:
+        name: knative-chart-ci
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/athens-proxy
+    context: knative-build
+    name: knative-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   cloudbees/cb-app-slack:
   - agent: knative-build
     always_run: true
@@ -629,7 +662,31 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  cloudbees/cb-app-sor:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)    
+
   jenkins-x-apps/jx-app-cheese:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go2
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  jenkins-x-apps/jx-app-jacoco:
   - agent: knative-build
     always_run: true
     build_spec:
@@ -683,6 +740,48 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
+  jenkins-x-apps/jx-app-test-lifecycle:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  jenkins-x-apps/jx-app-athens:
+    - agent: knative-build
+      always_run: true
+
+      build_spec:
+        template:
+          name: knative-chart-ci
+          arguments:
+            - name: WORKSPACE
+              value: /workspace/jx-app-athens
+      context: knative-build
+      name: knative-build
+      rerun_command: /test this
+      trigger: (?m)^/test( all| this),?(\s+|$)
+
+  jenkins-x-apps/jx-app-jenkins:
+    - agent: knative-build
+      always_run: true
+
+      build_spec:
+        template:
+          name: knative-chart-ci
+          arguments:
+            - name: WORKSPACE
+              value: /workspace/jx-app-jenkins
+      context: knative-build
+      name: knative-build
+      rerun_command: /test this
+      trigger: (?m)^/test( all| this),?(\s+|$)
+
   jenkins-x-charts/openshift-namespace-rbac-chart:
   - agent: knative-build
     always_run: true
@@ -712,7 +811,7 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  jenkins-x-charts/knative:
+  jenkins-x-charts/knative-build:
   - agent: knative-build
     always_run: true
     build_spec:
@@ -721,6 +820,20 @@ presubmits:
         arguments:
         - name: WORKSPACE
           value: /workspace/knative-build
+    context: knative-build
+    name: knative-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
+  jenkins-x-charts/tekton:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      template:
+        name: knative-chart-ci
+        arguments:
+        - name: WORKSPACE
+          value: /workspace/tekton
     context: knative-build
     name: knative-build
     rerun_command: /test this
@@ -787,50 +900,6 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/homebrew-jx:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/jenkins-x-image:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-base
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/jenkins-x-platform:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-base
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/jx-docs:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/jx-java-client:
   - agent: knative-build
     always_run: true
@@ -853,29 +922,7 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/jx-tutorial:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
   jenkins-x/metrics:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-base
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/nexus:
   - agent: knative-build
     always_run: true
     build_spec:
@@ -919,17 +966,6 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  jenkins-x/updatebot:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-maven
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)
 
   jenkins-x/vscode-jx-tools:
   - agent: knative-build
@@ -966,7 +1002,19 @@ presubmits:
     name: serverless-jenkins
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
-  
+
+  cloudbees/core-controllers:
+  - agent: knative-build
+    always_run: true
+    build_spec:
+      serviceAccountName: knative-build-bot
+      template:
+        name: jenkins-go
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+
   cloudbees/cloudbees-apps:
   - agent: knative-build
     always_run: true
@@ -999,6 +1047,67 @@ tide:
     skip-unknown-contexts: false
   queries:
   - labels:
+    - approved
+    missingLabels:
+    - do-not-merge
+    - do-not-merge/hold
+    - do-not-merge/work-in-progress
+    - needs-ok-to-test
+    - needs-rebase
+    repos:
+    - jenkins-x-bot/environment-jenkinsx-dev-staging
+    - jenkins-x-bot/environment-jenkinsx-dev-production
+    - jenkins-x/dex
+    - jenkins-x/oauth2_proxy
+    - jenkins-x-apps/jx-app-cheese
+    - jenkins-x-apps/jx-app-jacoco
+    - jenkins-x-apps/jx-app-sonarqube
+    - jenkins-x-apps/jx-app-gitea
+    - jenkins-x-apps/jx-app-grafana
+    - jenkins-x-apps/jx-app-athens
+    - jenkins-x-apps/jx-app-test-lifecycle
+    - jenkins-x-charts/vault-operator
+    - jenkins-x-charts/athens-proxy
+    - jenkins-x-charts/jx-build-templates
+    - jenkins-x-charts/openshift-namespace-rbac-chart
+    - jenkins-x-charts/knative
+    - jenkins-x-charts/tekton
+    - jenkins-x-charts/prow
+    - jenkins-x-charts/gerrit
+    - jenkins-x/ext-java-code-quality
+    - jenkins-x/cloud-environments
+    - jenkins-x/exposecontroller
+    - jenkins-x/exposecontroller-service
+    - jenkins-x/ext-spotbugs
+    - jenkins-x/jenkins-x-extensions
+    - jenkins-x/jx-java-client
+    - jenkins-x/jx-quickstarts-bdd-test-job
+    - jenkins-x/jx-release-version
+    - jenkins-x/metrics
+    - jenkins-x/pipeline-events-addon
+    - jenkins-x/sso-operator
+    - jenkins-x/terraform-provider-jx
+    - jenkins-x/vscode-jx-tools
+    - jenkins-x-images/xunit-viewer
+    - cloudbees/core-backend
+    - cloudbees/core-frontend
+    - cloudbees/core-controllers
+    - cloudbees/cb-app-slack
+    - cloudbees/cb-app-sor    
+    - cloudbees/cloudbees-apps
+    - jenkinsci/jx-resources-plugin
+  - labels:
+    - approved
+    - lgtm
+    missingLabels:
+    - do-not-merge
+    - do-not-merge/hold
+    - do-not-merge/work-in-progress
+    - needs-ok-to-test
+    - needs-rebase
+    repos:
+    - jenkinsci/jx-resources-plugin
+  - labels:
     - updatebot
     missingLabels:
     - do-not-merge
@@ -1014,68 +1123,7 @@ tide:
     repos:
     - cloudbees/core-backend
     - cloudbees/core-frontend
+    - cloudbees/core-controllers
+    - cloudbees/haha
     - cloudbees/cloudbees-apps
-  - labels:
-    - approved
-    missingLabels:
-    - do-not-merge
-    - do-not-merge/hold
-    - do-not-merge/work-in-progress
-    - needs-ok-to-test
-    - needs-rebase
-    repos:
-    - jenkins-x-bot/environment-jenkinsx-dev-staging
-    - jenkins-x-bot/environment-jenkinsx-dev-production
-    - jenkins-x/dex
-    - jenkins-x/ext-jacoco
-    - jenkins-x/jenkins-x-builders
-    - jenkins-x/jenkins-x-serverless
-    - jenkins-x-apps/jx-app-cheese
-    - jenkins-x-apps/jx-app-sonarqube
-    - jenkins-x-apps/jx-app-gitea
-    - jenkins-x-apps/jx-app-grafana
-    - jenkins-x-charts/vault-operator
-    - jenkins-x-charts/jx-build-templates
-    - jenkins-x-charts/openshift-namespace-rbac-chart
-    - jenkins-x-charts/knative
-    - jenkins-x-charts/prow
-    - jenkins-x-charts/gerrit
-    - jenkins-x/ext-java-code-quality
-    - jenkins-x/cloud-environments
-    - jenkins-x/exposecontroller
-    - jenkins-x/exposecontroller-service
-    - jenkins-x/homebrew-jx
-    - jenkins-x/jenkins-x-image
-    - jenkins-x/jenkins-x-platform
-    - jenkins-x/ext-spotbugs
-    - jenkins-x/jenkins-x-extensions
-    - jenkins-x/jx-docs
-    - jenkins-x/jx-java-client
-    - jenkins-x/jx-release-version
-    - jenkins-x/jx-tutorial
-    - jenkins-x/metrics
-    - jenkins-x/nexus
-    - jenkins-x/pipeline-events-addon
-    - jenkins-x/sso-operator
-    - jenkins-x/terraform-provider-jx
-    - jenkins-x/updatebot
-    - jenkins-x/vscode-jx-tools
-    - jenkins-x-images/xunit-viewer
-    - cloudbees/core-backend
-    - cloudbees/core-frontend
-    - cloudbees/cb-app-slack
-    - cloudbees/cloudbees-apps
-    - jenkinsci/jx-resources-plugin
-  - labels:
-    - approved
-    - lgtm
-    missingLabels:
-    - do-not-merge
-    - do-not-merge/hold
-    - do-not-merge/work-in-progress
-    - needs-ok-to-test
-    - needs-rebase
-    repos:
-    - jenkins-x/jx
-    - jenkinsci/jx-resources-plugin
   target_url: https://core.jx.cd.jenkins-x.io/teams/jx/pipelines

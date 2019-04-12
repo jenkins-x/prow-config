@@ -14,12 +14,15 @@ triggers:
   - prow
   - jx-build-templates
   - vault-operator
+  - athens-proxy
   - openshift-namespace-rbac-chart
+  - tekton
   trusted_org: jenkins-x-charts
   only_org_members: true
 - repos:
   - core-frontend
   - core-backend
+  - core-controllers
   - cloudbees-apps
   - cb-app-slack
   trusted_org: cloudbees
@@ -31,16 +34,24 @@ triggers:
 approve:
 - lgtm_acts_as_approve: true
   repos:
-  - jenkins-x/jx
-  review_acts_as_approve: true
+  - jenkins-x
+  require_self_approval: true
 - lgtm_acts_as_approve: true
   repos:
-  - jenkinsci/jx-resources-plugin
-  review_acts_as_approve: true
+  - jenkins-x-charts
+  require_self_approval: true
 - lgtm_acts_as_approve: true
   repos:
-  - cloudbees/core-backend
-  review_acts_as_approve: true
+  - jenkins-x-apps
+  require_self_approval: true
+- lgtm_acts_as_approve: true
+  repos:
+  - jenkinsci
+  require_self_approval: true
+- lgtm_acts_as_approve: true
+  repos:
+  - cloudbees
+  require_self_approval: true
 blunderbuss: {}
 cat: {}
 lgtm:
@@ -53,6 +64,9 @@ lgtm:
 - repos:
   - cloudbees/core-backend
   review_acts_as_lgtm: true
+- repos:
+  - cloudbees/core-controller
+  review_acts_as_lgtm: true
 config_updater:
   maps:
     prow/config.yaml:
@@ -64,6 +78,16 @@ heart:
   - jenkins-x-bot
 
 owners: {}
+external_plugins:
+  jenkins-x/jx:
+  - endpoint: http://cb-app-slack
+    name: cb-app-slack
+  jenkins-x-apps/jx-app-jacoco:
+  - endpoint: http://cb-app-slack
+    name: cb-app-slack
+  jenkins-x-apps/jx-app-cheese:
+  - endpoint: http://cb-app-slack
+    name: cb-app-slack
 plugins:
   jenkins-x/prow-config:
   - config-updater
@@ -97,7 +121,6 @@ plugins:
   - approve
   - heart
   - assign
-  - blunderbuss
   - help
   - hold
   - lgtm
@@ -106,32 +129,8 @@ plugins:
   - size
   - trigger
   - wip
-  jenkins-x/jenkins-x-builders:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
   - cat
-  jenkins-x/jenkins-x-serverless:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
+  - dog
   cloudbees/cb-app-slack:
   - approve
   - heart
@@ -149,7 +148,6 @@ plugins:
   - approve
   - heart
   - assign
-  - blunderbuss
   - help
   - hold
   - lgtm
@@ -157,12 +155,23 @@ plugins:
   - size
   - trigger
   - wip
-  - cat 
+  - cat
+  jenkins-x-apps/jx-app-jacoco:
+  - approve
+  - heart
+  - assign
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   jenkins-x-apps/jx-app-sonarqube:
   - approve
   - heart
   - assign
-  - blunderbuss
   - help
   - hold
   - lgtm
@@ -175,7 +184,6 @@ plugins:
   - approve
   - heart
   - assign
-  - blunderbuss
   - help
   - hold
   - lgtm
@@ -185,6 +193,42 @@ plugins:
   - wip
   - cat
   jenkins-x-apps/jx-app-grafana:
+  - approve
+  - heart
+  - assign
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  jenkins-x-apps/jx-app-athens:
+    - approve
+    - heart
+    - assign
+    - help
+    - hold
+    - lgtm
+    - lifecycle
+    - size
+    - trigger
+    - wip
+    - cat
+  jenkins-x-apps/jx-app-jenkins:
+    - approve
+    - heart
+    - assign
+    - help
+    - hold
+    - lgtm
+    - lifecycle
+    - size
+    - trigger
+    - wip
+    - cat
+  jenkins-x-apps/jx-app-test-lifecycle:
   - approve
   - heart
   - assign
@@ -198,6 +242,19 @@ plugins:
   - wip
   - cat
   jenkins-x-charts/vault-operator:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  jenkins-x-charts/athens-proxy:
   - approve
   - heart
   - assign
@@ -237,19 +294,6 @@ plugins:
   - wip
   - cat
   rawlingsj/testchart:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
-  jenkins-x/ext-jacoco:
   - approve
   - heart
   - assign
@@ -327,58 +371,6 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x/homebrew-jx:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
-  jenkins-x/jenkins-x-image:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
-  jenkins-x/jenkins-x-platform:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
-  jenkins-x/jx-docs:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
   jenkins-x/jx-java-client:
   - approve
   - heart
@@ -405,7 +397,7 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x/jx-tutorial:
+  jenkins-x-charts/knative-build:
   - approve
   - heart
   - assign
@@ -418,7 +410,8 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x-charts/knative:
+  - cat
+  jenkins-x-charts/tekton:
   - approve
   - heart
   - assign
@@ -432,19 +425,6 @@ plugins:
   - wip
   - cat
   jenkins-x/metrics:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
-  jenkins-x/nexus:
   - approve
   - heart
   - assign
@@ -522,19 +502,6 @@ plugins:
   - trigger
   - wip
   - cat
-  jenkins-x/updatebot:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
   jenkins-x/vscode-jx-tools:
   - approve
   - heart
@@ -549,6 +516,19 @@ plugins:
   - wip
   - cat
   jenkins-x/jenkins-x-extensions:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  jenkins-x/jx-quickstarts-bdd-test-job:
   - approve
   - heart
   - assign
@@ -599,6 +579,18 @@ plugins:
   - trigger
   - wip
   - yuks
+  cloudbees/core-controllers:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
   jenkins-x-charts/jx-build-templates:
   - approve
   - heart
@@ -611,6 +603,7 @@ plugins:
   - size
   - trigger
   - wip
+  - yuks
   jenkinsci/jx-resources-plugin:
   - approve
   - heart
@@ -624,7 +617,33 @@ plugins:
   - trigger
   - wip
   - cat
+  jenkins-x-images/allure:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
   jenkins-x-images/xunit-viewer:
+  - approve
+  - heart
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - cat
+  jenkins-x-images/oauth2_proxy:
   - approve
   - heart
   - assign
