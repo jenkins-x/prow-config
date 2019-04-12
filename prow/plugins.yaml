@@ -603,7 +603,6 @@ plugins:
   - size
   - trigger
   - wip
-  - yuks
   jenkinsci/jx-resources-plugin:
   - approve
   - heart
