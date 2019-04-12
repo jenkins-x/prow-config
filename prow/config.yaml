@@ -45,9 +45,6 @@ branch-protection:
         core-controllers:
           required_status_checks:
             contexts: ["serverless-jenkins"]
-        haha:
-          required_status_checks:
-            contexts: ["serverless-jenkins"]
         cloudbees-apps:
           required_status_checks:
             contexts: ["serverless-jenkins"]
@@ -497,16 +494,6 @@ postsubmits:
     name: release
 
   cloudbees/core-controllers:
-  - agent: knative-build
-    branches:
-    - master
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    name: release
-
-  cloudbees/haha:
   - agent: knative-build
     branches:
     - master
@@ -1028,18 +1015,6 @@ presubmits:
     rerun_command: /test this
     trigger: (?m)^/test( all| this),?(\s+|$)
 
-  cloudbees/haha:
-  - agent: knative-build
-    always_run: true
-    build_spec:
-      serviceAccountName: knative-build-bot
-      template:
-        name: jenkins-go
-    context: serverless-jenkins
-    name: serverless-jenkins
-    rerun_command: /test this
-    trigger: (?m)^/test( all| this),?(\s+|$)  
-
   cloudbees/cloudbees-apps:
   - agent: knative-build
     always_run: true
@@ -1117,7 +1092,6 @@ tide:
     - cloudbees/core-backend
     - cloudbees/core-frontend
     - cloudbees/core-controllers
-    - cloudbees/haha
     - cloudbees/cb-app-slack
     - cloudbees/cb-app-sor    
     - cloudbees/cloudbees-apps
@@ -1150,6 +1124,5 @@ tide:
     - cloudbees/core-backend
     - cloudbees/core-frontend
     - cloudbees/core-controllers
-    - cloudbees/haha
     - cloudbees/cloudbees-apps
   target_url: https://core.jx.cd.jenkins-x.io/teams/jx/pipelines

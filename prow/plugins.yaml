@@ -23,7 +23,6 @@ triggers:
   - core-frontend
   - core-backend
   - core-controllers
-  - haha
   - cloudbees-apps
   - cb-app-slack
   trusted_org: cloudbees
@@ -295,19 +294,6 @@ plugins:
   - wip
   - cat
   rawlingsj/testchart:
-  - approve
-  - heart
-  - assign
-  - blunderbuss
-  - help
-  - hold
-  - lgtm
-  - lifecycle
-  - size
-  - trigger
-  - wip
-  - cat
-  cloudbees/haha:
   - approve
   - heart
   - assign
